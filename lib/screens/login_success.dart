@@ -5,6 +5,8 @@ class LoginSuccessScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       backgroundColor: Color(0xffe3faf3),
       body: Column(
@@ -13,14 +15,14 @@ class LoginSuccessScreen extends StatelessWidget {
             "assets/img/greentop_loginsuccess.png",
             fit: BoxFit.cover,
           ),
-          SizedBox(height: 124),
+          SizedBox(height: screenHeight * 0.12),
           Image.asset(
             "assets/img/photo_loginsuccess.png",
             fit: BoxFit.cover,
             width: 274.21,
             height: 227.8,
           ),
-          SizedBox(height: 27.79),
+          SizedBox(height: screenHeight * 0.04),
           Text(
             "LOGIN SUCCESS",
             style: TextStyle(
@@ -43,10 +45,117 @@ class LoginSuccessScreen extends StatelessWidget {
           Spacer(),
           Container(
             width: double.infinity,
-            height: 62,
-            margin: EdgeInsets.only(left: 32, right: 33.01),
+            height: screenHeight * 0.06,
+            margin: EdgeInsets.only(
+              left: screenWidth * 0.06,
+              right: screenWidth * 0.06,
+            ),
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (context) {
+                    // Alert dialog box
+                    return AlertDialog(
+                      content: Padding(
+                        padding: const EdgeInsets.only(top: 48.0),
+                        child: Image.asset(
+                          "assets/img/location_otpscreen.png",
+                          height: 109.5,
+                          width: 109.5,
+                        ),
+                      ),
+                      actions: <Widget>[
+                        Column(
+                          children: [
+                            Text(
+                              textAlign: TextAlign.center,
+                              "Enable Your Location",
+                              style: TextStyle(
+                                fontSize: 26,
+                                fontWeight: FontWeight.w600,
+                                fontFamily: "Poppins",
+                                color: Color(0xff100c08),
+                              ),
+                            ),
+                            Text(
+                              textAlign: TextAlign.center,
+                              "Choose Your Location To Start Find\nThe Request Around You",
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w400,
+                                fontFamily: "Poppins",
+                                color: Color(0xff535353),
+                              ),
+                            ),
+
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                top: 24,
+                                bottom: 12,
+                                left: 27,
+                                right: 28,
+                              ),
+
+                              //Use My Location Button
+                              child: SizedBox(
+                                width: double.infinity,
+                                height: 54,
+                                child: ElevatedButton(
+                                  onPressed: () {},
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: Color(0xff16CE92),
+                                  ),
+                                  child: Text(
+                                    "Use My Location",
+                                    style: TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w500,
+                                      fontFamily: "Poppins",
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+
+                            //Skip for Now Button
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                bottom: 12,
+                                left: 27,
+                                right: 28,
+                              ),
+                              child: SizedBox(
+                                width: double.infinity,
+                                height: 54,
+                                child: ElevatedButton(
+                                  onPressed: () {},
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: Color(0xffF3F4FF),
+                                  ),
+                                  child: Text(
+                                    "Skip for Now",
+                                    style: TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w500,
+                                      fontFamily: "Poppins",
+                                      color: Color(0xffB8B8B8),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    );
+                  },
+                );
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Color(0xffffffff),
+              ),
               child: Text(
                 "Continue",
                 style: TextStyle(
@@ -56,12 +165,9 @@ class LoginSuccessScreen extends StatelessWidget {
                   fontFamily: "Poppins",
                 ),
               ),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Color(0xffffffff),
-              ),
             ),
           ),
-          SizedBox(height: 27),
+          SizedBox(height: screenHeight * 0.02),
           RichText(
             textAlign: TextAlign.center,
             text: TextSpan(

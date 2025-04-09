@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:happyeasyrides/screens/splash.dart';
-import 'package:happyeasyrides/screens/splash01.dart';
-import 'package:happyeasyrides/screens/splash02.dart';
-import 'package:happyeasyrides/screens/splash03.dart';
+import 'package:happyeasyrides/common/bottom_navigation.dart';
+import 'package:happyeasyrides/screens/coupons.dart';
 
 void main() {
   runApp(const MyApp());
@@ -20,7 +18,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: SplashScreen(),
+      home: CouponsScreen(),
     );
   }
 }

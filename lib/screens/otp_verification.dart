@@ -3,7 +3,8 @@ import 'package:happyeasyrides/screens/login_success.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 class OtpVerificationScreen extends StatefulWidget {
-  const OtpVerificationScreen({super.key});
+  final String phoneNumber;
+  const OtpVerificationScreen({super.key, required this.phoneNumber});
 
   @override
   State<OtpVerificationScreen> createState() => _OtpVerificationScreenState();
@@ -12,7 +13,11 @@ class OtpVerificationScreen extends StatefulWidget {
 class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
+      resizeToAvoidBottomInset: false,
+
       backgroundColor: Color(0xffe3f9f2),
       body: Column(
         children: [
@@ -23,7 +28,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
 
                 children: [
-                  SizedBox(height: 50),
+                  SizedBox(height: screenHeight * 0.065),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
 
@@ -40,7 +45,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                       ),
                     ],
                   ),
-                  SizedBox(height: 42),
+                  SizedBox(height: screenHeight * 0.042),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -56,7 +61,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
               ),
             ],
           ),
-          SizedBox(height: 31.58),
+          SizedBox(height: screenHeight * 0.04),
           Text(
             "VERIFICATION CODE",
             style: TextStyle(
@@ -76,10 +81,10 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
               color: Color(0xff535353),
             ),
           ),
-          SizedBox(height: 10),
+          SizedBox(height: screenHeight * 0.01),
           Container(
-            height: 34,
-            width: 186,
+            height: screenHeight * 0.033,
+            width: screenWidth * 0.46,
             decoration: BoxDecoration(
               color: Color(0xffd5ebe4),
               borderRadius: BorderRadius.circular(30),
@@ -96,27 +101,34 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                   ),
                   SizedBox(width: 3.86),
                   Text(
-                    "+911012345678",
+                    widget.phoneNumber,
                     style: TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.w500,
                       color: Color(0xff343D3C),
                     ),
                   ),
-                  SizedBox(width: 10),
-                  Image.asset(
-                    "assets/img/editbutton_verification.png",
-                    width: 26,
-                    height: 26,
+                  SizedBox(width: screenWidth * 0.01),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                    child: Image.asset(
+                      "assets/img/editbutton_verification.png",
+                      width: 26,
+                      height: 26,
+                    ),
                   ),
                 ],
               ),
             ),
           ),
-          SizedBox(height: 47),
+          SizedBox(height: screenHeight * 0.047),
           Padding(
-            padding: const EdgeInsets.only(left: 27.0, right: 27),
+            padding: const EdgeInsets.only(left: 27, right: 27),
             child: PinCodeTextField(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              keyboardType: TextInputType.number,
               length: 4,
               appContext: context,
               blinkWhenObscuring: true,
@@ -173,8 +185,11 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
           Spacer(),
           Container(
             width: double.infinity,
-            height: 62,
-            margin: EdgeInsets.only(left: 32, right: 33.01),
+            height: screenHeight * 0.06,
+            margin: EdgeInsets.only(
+              left: screenWidth * 0.06,
+              right: screenWidth * 0.06,
+            ),
             child: ElevatedButton(
               onPressed: () {
                 Navigator.push(
@@ -182,6 +197,9 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                   MaterialPageRoute(builder: (context) => LoginSuccessScreen()),
                 );
               },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Color(0xff0077AC),
+              ),
               child: Text(
                 "Verify Now",
                 style: TextStyle(
@@ -191,12 +209,9 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                   fontFamily: "Poppins",
                 ),
               ),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Color(0xff0077AC),
-              ),
             ),
           ),
-          SizedBox(height: 27),
+          SizedBox(height: screenHeight * 0.027),
           RichText(
             textAlign: TextAlign.center,
             text: TextSpan(

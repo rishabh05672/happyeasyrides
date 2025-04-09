@@ -9,11 +9,14 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  TextEditingController phoneController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       backgroundColor: Color(0xffe3f9f2),
       body: Column(
         children: [
@@ -81,9 +84,15 @@ class _LoginScreenState extends State<LoginScreen> {
               left: screenWidth * 0.06,
               right: screenWidth * 0.06,
             ),
+
+            //Textfield for Phone Number
             child: TextField(
+              controller: phoneController,
               keyboardType: TextInputType.phone,
+              maxLength: 10,
+
               decoration: InputDecoration(
+                counterText: "",
                 hintText: "Enter Your Mobile Number",
                 hintStyle: TextStyle(
                   fontSize: 16,
@@ -151,13 +160,19 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             child: ElevatedButton(
               onPressed: () {
+                String phoneNumber = (phoneController.text);
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => OtpVerificationScreen(),
+                    builder:
+                        (context) =>
+                            OtpVerificationScreen(phoneNumber: phoneNumber),
                   ),
                 );
               },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Color(0xff0077AC),
+              ),
               child: Text(
                 "Confirm Now",
                 style: TextStyle(
@@ -166,9 +181,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   color: Color(0xffF9F9F9),
                   fontFamily: "Poppins",
                 ),
-              ),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Color(0xff0077AC),
               ),
             ),
           ),
