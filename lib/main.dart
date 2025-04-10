@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:happyeasyrides/common/bottom_navigation.dart';
+
 import 'package:happyeasyrides/screens/coupons.dart';
+import 'package:happyeasyrides/screens/splash10.dart';
 
 void main() {
   runApp(const MyApp());
