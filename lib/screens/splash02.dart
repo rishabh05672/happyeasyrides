@@ -109,6 +109,13 @@ class Splash02Screen extends StatelessWidget {
                     MaterialPageRoute(builder: (context) => Splash03Screen()),
                   );
                 },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(50),
+                    side: BorderSide(color: Color(0xff0077AC), width: 1.4),
+                  ),
+                ),
                 child: Text(
                   "Next",
                   style: TextStyle(
@@ -116,13 +123,6 @@ class Splash02Screen extends StatelessWidget {
                     fontWeight: FontWeight.w600,
                     color: Color(0xff0077AC),
                     fontFamily: "Poppins",
-                  ),
-                ),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.white,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(50),
-                    side: BorderSide(color: Color(0xff0077AC), width: 1.4),
                   ),
                 ),
               ),

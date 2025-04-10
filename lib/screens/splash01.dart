@@ -109,6 +109,9 @@ class Splash01Screen extends StatelessWidget {
                     MaterialPageRoute(builder: (context) => Splash02Screen()),
                   );
                 },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Color(0xff0077AC),
+                ),
                 child: Text(
                   "Get Started",
                   style: TextStyle(
@@ -117,9 +120,6 @@ class Splash01Screen extends StatelessWidget {
                     color: Color(0xffF9F9F9),
                     fontFamily: "Poppins",
                   ),
-                ),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Color(0xff0077AC),
                 ),
               ),
             ),
