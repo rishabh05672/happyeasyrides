@@ -1,5 +1,7 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
-import 'package:happyeasyrides/screens/splash01.dart';
+import 'package:happyeasyrides/screens/pageview_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -12,11 +14,10 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(seconds: 3), () {
-      Navigator.push(
-        // ignore: use_build_context_synchronously
+    Timer(Duration(seconds: 3), () {
+      Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => const Splash01Screen()),
+        MaterialPageRoute(builder: (context) => PageViewScreen()),
       );
     });
   }

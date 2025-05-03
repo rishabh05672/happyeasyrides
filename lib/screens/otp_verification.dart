@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+
 import 'package:happyeasyrides/screens/login_success.dart';
+
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 class OtpVerificationScreen extends StatefulWidget {
@@ -125,7 +127,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
           ),
           SizedBox(height: screenHeight * 0.047),
           Padding(
-            padding: const EdgeInsets.only(left: 27, right: 27),
+            padding: const EdgeInsets.symmetric(horizontal: 27),
             child: PinCodeTextField(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               keyboardType: TextInputType.number,
@@ -141,7 +143,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                 shape: PinCodeFieldShape.box,
                 borderRadius: BorderRadius.circular(30),
                 fieldHeight: 65,
-                fieldWidth: 86,
+                fieldWidth: 70,
                 activeFillColor: Color(0xffCCD7E8),
                 inactiveFillColor: Color(0xffffffff),
                 selectedFillColor: Color(0xffffffff),

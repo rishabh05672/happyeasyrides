@@ -1,105 +1,105 @@
 import 'package:flutter/material.dart';
 
-class CouponsScreen extends StatefulWidget {
-  const CouponsScreen({super.key});
+class Coupons extends StatefulWidget {
+  const Coupons({super.key});
 
   @override
-  State<CouponsScreen> createState() => _CouponsScreenState();
+  State<Coupons> createState() => _CouponsState();
 }
 
-class _CouponsScreenState extends State<CouponsScreen> {
-  int selectedIndex = 0;
+class _CouponsState extends State<Coupons> {
+  final List<Map<String, String>> offer = [
+    {
+      'backgroundImage': 'assets/img/Clip path group.png',
+      'title': '5 Days Rental Package',
+      'discount': '10% Flat Of',
+      'description': 'On all bookings of 5 days & more',
+      'image': 'assets/img/firstpic_coupon.png',
+      'carImage': 'assets/img/carfirstpic_coupon.png',
+    },
+    {
+      'backgroundImage': 'assets/img/Mask Group 190.png',
+      'title': '5 Days Rental Package',
+      'discount': '10% Flat Of',
+      'description': 'On all bookings of 5 days & more',
+      'image': 'assets/img/secondpic_coupon.png',
+      'carImage': 'assets/img/secondcar_coupon.png',
+    },
+    {
+      'backgroundImage': 'assets/img/Mask Group 192.png',
+      'title': '5 Days Rental Package',
+      'discount': '10% Flat Of',
+      'description': 'On all bookings of 5 days & more',
+      'image': 'assets/img/thirdpic_coupon.png',
+      'carImage': 'assets/img/carthirdpic_coupon.png',
+    },
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xff15CF92),
+      appBar: AppBar(
+        centerTitle: true,
+        backgroundColor: Color(0xff15CF92),
+        flexibleSpace: Container(
+          width: double.infinity,
+          height: 116,
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage("assets/img/greentop_coupons.png"),
+              fit: BoxFit.fill,
+            ),
+          ),
+        ),
+        title: Text(
+          "COUPONS",
+          style: TextStyle(
+            fontFamily: "Poppins",
+            fontSize: 20,
+            fontWeight: FontWeight.w600,
+            color: Colors.white,
+          ),
+        ),
+        leading: Padding(
+          padding: const EdgeInsets.only(bottom: 10.0),
+          child: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: Icon(Icons.arrow_back_sharp, color: Colors.white, size: 21),
+          ),
+        ),
+      ),
+      //Body
       body: Column(
         children: [
-          // AppBar with Image
-          Stack(
-            children: [
-              Image.asset(
-                "assets/img/greentop_coupons.png",
-                fit: BoxFit.cover,
-                width: double.infinity,
-                height: 116,
-              ),
-
-              Padding(
-                padding: const EdgeInsets.only(
-                  top: 40.0,
-                  bottom: 34,
-                  left: 20.5,
-                  right: 20.5,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    // Back button
-                    IconButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      icon: Icon(
-                        Icons.arrow_back_outlined,
-                        size: 21,
-                        color: Colors.white,
-                      ),
-                    ),
-
-                    //Text
-                    Text(
-                      "Coupons",
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontFamily: "Poppins",
-                        fontWeight: FontWeight.w600,
-                        color: Colors.white,
-                      ),
-                    ),
-
-                    // Notification Button
-                    IconButton(
-                      onPressed: () {},
-                      icon: Icon(
-                        Icons.notifications_outlined,
-                        size: 21,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-
-          // white background container
           Expanded(
             child: Container(
-              margin: EdgeInsets.only(top: 24),
+              margin: EdgeInsets.only(top: 34),
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(40),
-                  topRight: Radius.circular(40),
+                  topLeft: Radius.circular(50),
+                  topRight: Radius.circular(50),
                 ),
               ),
-              //White background container column
-              child: Column(
-                children: [
-                  //1st Container of white Container
-                  Container(
-                    margin: EdgeInsets.only(top: 12.47, left: 20, right: 20),
-                    width: 400,
-                    height: 200,
+              child: ListView.builder(
+                itemCount: offer.length,
+                itemBuilder: (context, index) {
+                  return Container(
+                    margin: EdgeInsets.only(
+                      left: 20,
+                      right: 20,
+                      top: 12,
+                      bottom: 12,
+                    ),
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
+                      borderRadius: BorderRadius.circular(30),
                       image: DecorationImage(
-                        image: AssetImage("assets/img/Clip path group.png"),
+                        image: AssetImage("${offer[index]['backgroundImage']}"),
                         fit: BoxFit.fill,
                       ),
                     ),
-                    //1st Container Row
                     child: Stack(
                       children: [
                         Row(
@@ -107,519 +107,126 @@ class _CouponsScreenState extends State<CouponsScreen> {
                           children: [
                             Padding(
                               padding: const EdgeInsets.only(
-                                top: 36.0,
+                                top: 36.4,
                                 left: 23,
+                                bottom: 58.39,
                               ),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    "5 Days Rental Package",
+                                    "${offer[index]['title']}",
                                     style: TextStyle(
-                                      fontSize: 13,
-                                      fontWeight: FontWeight.w400,
                                       fontFamily: "Poppins",
+                                      fontSize: 13,
+                                      fontWeight: FontWeight.w600,
                                       color: Color(0xff0077AC),
                                     ),
                                   ),
                                   Text(
-                                    "15% Flat of",
+                                    "${offer[index]['discount']}",
                                     style: TextStyle(
+                                      fontFamily: "Poppins",
                                       fontSize: 21,
                                       fontWeight: FontWeight.w600,
-                                      fontFamily: "Poppins",
                                       color: Color(0xff05073C),
                                     ),
                                   ),
                                   Text(
-                                    'On all bookings of 5 Days & more',
+                                    "${offer[index]['description']}",
                                     style: TextStyle(
                                       fontFamily: "Poppins",
-                                      fontWeight: FontWeight.w500,
                                       fontSize: 9,
+                                      fontWeight: FontWeight.w500,
+                                      color: Color(0xff100C08),
                                     ),
                                   ),
                                   Container(
-                                    height: 33.33,
-                                    width: 111.11,
                                     margin: EdgeInsets.only(top: 8.19),
+                                    width: 111.11,
+                                    height: 33.33,
                                     decoration: BoxDecoration(
                                       color: Colors.white,
-                                      borderRadius: BorderRadius.circular(30),
+                                      borderRadius: BorderRadius.circular(40),
                                     ),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceAround,
-                                      children: [
-                                        Text(
-                                          "Know More",
-                                          style: TextStyle(
-                                            fontSize: 10,
-                                            fontWeight: FontWeight.w500,
-                                            fontFamily: "Poppins",
-                                            color: Color(0xff05073C),
-                                          ),
-                                        ),
-                                        Container(
-                                          height: 24.44,
-                                          width: 24.44,
-                                          decoration: BoxDecoration(
-                                            color: Color(0xff16CE92),
-                                            borderRadius: BorderRadius.circular(
-                                              50,
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(
+                                        left: 12.35,
+                                        right: 4.44,
+                                      ),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(
+                                            "Know More",
+                                            style: TextStyle(
+                                              fontFamily: "Poppins",
+                                              fontSize: 10,
+                                              fontWeight: FontWeight.w500,
+                                              color: Color(0xff05073C),
                                             ),
                                           ),
-                                          child: Icon(
-                                            Icons.arrow_right_alt_outlined,
-                                            color: Colors.white,
-                                            size: 12,
+                                          Container(
+                                            height: 24.44,
+                                            width: 24.44,
+                                            decoration: BoxDecoration(
+                                              color: Color(0xff16CE92),
+                                              borderRadius:
+                                                  BorderRadius.circular(50),
+                                            ),
+                                            child: Icon(
+                                              Icons.arrow_right_alt_outlined,
+                                              color: Colors.white,
+                                              size: 12,
+                                            ),
                                           ),
-                                        ),
-                                      ],
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 ],
                               ),
                             ),
-                            //Image Container
-                            Container(
-                              height: 200.93,
-                              width: 183.32,
-                              decoration: BoxDecoration(
-                                image: DecorationImage(
-                                  image: AssetImage(
-                                    "assets/img/firstpic_coupon.png",
-                                  ),
-
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-
-                        // Bottom Car Image
-                        Center(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.end,
-
-                            children: [
-                              Image.asset(
-                                "assets/img/carfirstpic_coupon.png",
-                                height: 56.32,
-                                width: 123.24,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-
-                  // 2nd Container of white Container
-                  Container(
-                    margin: EdgeInsets.only(top: 12.47, left: 20, right: 20),
-                    width: 400,
-                    height: 200,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      image: DecorationImage(
-                        image: AssetImage("assets/img/Mask Group 190.png"),
-                        fit: BoxFit.fill,
-                      ),
-                    ),
-                    //2nd Container Row
-                    child: Stack(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                top: 36.0,
-                                left: 23,
-                              ),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    "5 Days Rental Package",
-                                    style: TextStyle(
-                                      fontSize: 13,
-                                      fontWeight: FontWeight.w400,
-                                      fontFamily: "Poppins",
-                                      color: Color(0xff0077AC),
-                                    ),
-                                  ),
-                                  Text(
-                                    "15% Flat of",
-                                    style: TextStyle(
-                                      fontSize: 21,
-                                      fontWeight: FontWeight.w600,
-                                      fontFamily: "Poppins",
-                                      color: Color(0xff05073C),
-                                    ),
-                                  ),
-                                  Text(
-                                    'On all bookings of 5 Days & more',
-                                    style: TextStyle(
-                                      fontFamily: "Poppins",
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 9,
-                                    ),
-                                  ),
-                                  Container(
-                                    height: 33.33,
-                                    width: 111.11,
-                                    margin: EdgeInsets.only(top: 8.19),
-                                    decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius: BorderRadius.circular(30),
-                                    ),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceAround,
-                                      children: [
-                                        Text(
-                                          "Know More",
-                                          style: TextStyle(
-                                            fontSize: 10,
-                                            fontWeight: FontWeight.w500,
-                                            fontFamily: "Poppins",
-                                            color: Color(0xff05073C),
-                                          ),
-                                        ),
-                                        Container(
-                                          height: 24.44,
-                                          width: 24.44,
-                                          decoration: BoxDecoration(
-                                            color: Color(0xff16CE92),
-                                            borderRadius: BorderRadius.circular(
-                                              50,
-                                            ),
-                                          ),
-                                          child: Icon(
-                                            Icons.arrow_right_alt_outlined,
-                                            color: Colors.white,
-                                            size: 12,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            //Image Container
                             Container(
                               height: 200,
-                              width: 161,
+                              width: 170,
                               decoration: BoxDecoration(
                                 image: DecorationImage(
-                                  image: AssetImage(
-                                    "assets/img/secondpic_coupon.png",
-                                  ),
-                                  fit: BoxFit.contain,
+                                  image: AssetImage("${offer[index]['image']}"),
+                                  fit: BoxFit.fill,
                                 ),
                               ),
                             ),
                           ],
                         ),
 
-                        // Bottom Car Image
-                        Center(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.end,
-
-                            children: [
-                              Image.asset(
-                                "assets/img/secondcar_coupon.png",
-                                height: 118.97,
-                                width: 130,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-
-                  // 3rd Container of white Container
-                  Container(
-                    margin: EdgeInsets.only(top: 12.47, left: 20, right: 20),
-                    width: 400,
-                    height: 200,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      image: DecorationImage(
-                        image: AssetImage("assets/img/Mask Group 192.png"),
-                        fit: BoxFit.fill,
-                      ),
-                    ),
-                    //3rd Container Row
-                    child: Stack(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                top: 36.0,
-                                left: 23,
-                              ),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    "5 Days Rental Package",
-                                    style: TextStyle(
-                                      fontSize: 13,
-                                      fontWeight: FontWeight.w400,
-                                      fontFamily: "Poppins",
-                                      color: Color(0xff0077AC),
-                                    ),
-                                  ),
-                                  Text(
-                                    "15% Flat of",
-                                    style: TextStyle(
-                                      fontSize: 21,
-                                      fontWeight: FontWeight.w600,
-                                      fontFamily: "Poppins",
-                                      color: Color(0xff05073C),
-                                    ),
-                                  ),
-                                  Text(
-                                    'On all bookings of 5 Days & more',
-                                    style: TextStyle(
-                                      fontFamily: "Poppins",
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 9,
-                                    ),
-                                  ),
-                                  Container(
-                                    height: 33.33,
-                                    width: 111.11,
-                                    margin: EdgeInsets.only(top: 8.19),
-                                    decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius: BorderRadius.circular(30),
-                                    ),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceAround,
-                                      children: [
-                                        Text(
-                                          "Know More",
-                                          style: TextStyle(
-                                            fontSize: 10,
-                                            fontWeight: FontWeight.w500,
-                                            fontFamily: "Poppins",
-                                            color: Color(0xff05073C),
-                                          ),
-                                        ),
-                                        Container(
-                                          height: 24.44,
-                                          width: 24.44,
-                                          decoration: BoxDecoration(
-                                            color: Color(0xff16CE92),
-                                            borderRadius: BorderRadius.circular(
-                                              50,
-                                            ),
-                                          ),
-                                          child: Icon(
-                                            Icons.arrow_right_alt_outlined,
-                                            color: Colors.white,
-                                            size: 12,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            //Image Container
-                            Container(
-                              height: 200,
-                              width: 169,
+                        Positioned(
+                          bottom: 0,
+                          left: 0,
+                          right: 0,
+                          child: Center(
+                            child: Container(
+                              width: 125,
+                              height: 95,
                               decoration: BoxDecoration(
                                 image: DecorationImage(
                                   image: AssetImage(
-                                    "assets/img/thirdpic_coupon.png",
+                                    "${offer[index]['carImage']}",
                                   ),
-                                  fit: BoxFit.contain,
                                 ),
                               ),
                             ),
-                          ],
-                        ),
-
-                        // Bottom Car Image
-                        Center(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.end,
-
-                            children: [
-                              Image.asset(
-                                "assets/img/carthirdpic_coupon.png",
-                                height: 92.78,
-                                width: 128.45,
-                              ),
-                            ],
                           ),
                         ),
                       ],
                     ),
-                  ),
-                ],
+                  );
+                },
               ),
             ),
           ),
         ],
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: FloatingActionButton(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
-
-        onPressed: () {},
-        backgroundColor: Color(0xff0077AC),
-        child: Image.asset(
-          "assets/img/carfabbutton.png",
-          width: 25.07,
-          height: 24.18,
-          fit: BoxFit.fill,
-        ),
-      ),
-      bottomNavigationBar: BottomAppBar(
-        height: 81.0,
-        notchMargin: 5.0,
-        shape: CircularNotchedRectangle(),
-        color: Colors.white,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            IconButton(
-              onPressed: () {
-                setState(() {
-                  selectedIndex = 0;
-                });
-              },
-              icon: Column(
-                children: [
-                  Image.asset(
-                    "assets/img/home_icon.png",
-                    width: 24.03,
-                    height: 23.99,
-                    color: selectedIndex == 0 ? Color(0xff16CE92) : null,
-                  ),
-                  Text(
-                    "Home",
-                    style: TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.w500,
-                      fontFamily: "Poppins",
-                      color:
-                          selectedIndex == 0
-                              ? Color(0xff16ce92)
-                              : Color(0xff686E82),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            IconButton(
-              onPressed: () {
-                setState(() {
-                  selectedIndex = 1;
-                });
-              },
-              icon: Column(
-                children: [
-                  Image.asset(
-                    "assets/img/myBooking_icon.png",
-                    width: 24.03,
-                    height: 23.99,
-                    color: selectedIndex == 1 ? Color(0xff16ce92) : null,
-                  ),
-                  Text(
-                    "My Booking",
-                    style: TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.w500,
-                      fontFamily: "Poppins",
-                      color:
-                          selectedIndex == 1
-                              ? Color(0xff16ce92)
-                              : Color(0xff686E82),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            IconButton(
-              onPressed: () {
-                setState(() {
-                  selectedIndex = 2;
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => CouponsScreen()),
-                  );
-                });
-              },
-              icon: Column(
-                children: [
-                  Image.asset(
-                    "assets/img/offer_icon.png",
-                    width: 24.03,
-                    height: 23.99,
-                    color: selectedIndex == 2 ? Color(0xff16ce92) : null,
-                  ),
-                  Text(
-                    "Offers",
-                    style: TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.w500,
-                      fontFamily: "Poppins",
-                      color:
-                          selectedIndex == 2
-                              ? Color(0xff16ce92)
-                              : Color(0xff686E82),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            IconButton(
-              onPressed: () {
-                setState(() {
-                  selectedIndex = 3;
-                });
-              },
-              icon: Column(
-                children: [
-                  Image.asset(
-                    "assets/img/profile_icon.png",
-                    width: 24.03,
-                    height: 23.99,
-                    color: selectedIndex == 3 ? Color(0xff16ce92) : null,
-                  ),
-                  Text(
-                    "Profile",
-                    style: TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.w500,
-                      fontFamily: "Poppins",
-                      color:
-                          selectedIndex == 3
-                              ? Color(0xff16ce92)
-                              : Color(0xff686E82),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
       ),
     );
   }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:happyeasyrides/common/custom_bottom_navigation.dart';
 
 class LoginSuccessScreen extends StatelessWidget {
   const LoginSuccessScreen({super.key});
@@ -130,7 +131,16 @@ class LoginSuccessScreen extends StatelessWidget {
                                 width: double.infinity,
                                 height: 54,
                                 child: ElevatedButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder:
+                                            (context) =>
+                                                CustomBottomNavigation(),
+                                      ),
+                                    );
+                                  },
                                   style: ElevatedButton.styleFrom(
                                     backgroundColor: Color(0xffF3F4FF),
                                   ),
