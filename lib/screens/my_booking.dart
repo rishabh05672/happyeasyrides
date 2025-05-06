@@ -92,7 +92,7 @@ class _MyBookingScreenState extends State<MyBookingScreen>
               child: Container(
                 margin: EdgeInsets.only(top: 30),
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: Color(0xfff8f8fb),
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(40),
                     topRight: Radius.circular(40),

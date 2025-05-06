@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:happyeasyrides/screens/my_booking.dart';
 
 import 'package:happyeasyrides/screens/splash.dart';
@@ -21,7 +22,8 @@ class MyApp extends StatelessWidget {
         fontFamily: "Poppins",
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: //CustomBottomNavigation(),
+      home: //DuplicateHome(),
+          //CustomBottomNavigation(),
           SplashScreen(),
       //UpcomingScreen(),
       //MyBookingScreen(),

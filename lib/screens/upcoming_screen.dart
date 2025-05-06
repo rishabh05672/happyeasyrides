@@ -88,9 +88,10 @@ class _UpcomingScreenState extends State<UpcomingScreen> {
       itemCount: arrUpcoming.length,
       itemBuilder: (context, index) {
         return Container(
-          margin: EdgeInsets.only(left: 20, right: 20, top: 25, bottom: 10),
+          margin: EdgeInsets.only(left: 20, right: 20, top: 25),
           decoration: BoxDecoration(
-            border: Border.all(width: 1),
+            color: Color(0xffffffff),
+            border: Border.all(width: 1, color: Color(0xffe6e6f3)),
             borderRadius: BorderRadius.circular(20),
           ),
           child: Padding(
@@ -119,8 +120,8 @@ class _UpcomingScreenState extends State<UpcomingScreen> {
                     ),
                   ),
                 ),
-                Container(
-                  margin: EdgeInsets.only(left: 11),
+                SizedBox(width: 10),
+                Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -209,64 +210,24 @@ class _UpcomingScreenState extends State<UpcomingScreen> {
                           ),
                         ],
                       ),
+                      SizedBox(height: 4.75),
                       Row(
                         children: [
-                          Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              border: Border.all(
-                                width: 1,
-                                color: Color(0xff94ffdc),
-                              ),
-                              color: Color(0xffe9fff8),
+                          Expanded(
+                            child: newcont(
+                              date: arrUpcoming[index]["pickUpdate"],
+                              heading: "Pick Up-",
+                              location: arrUpcoming[index]["pickUpaddress"],
+                              time: arrUpcoming[index]["pickUptime"],
                             ),
-                            child: Padding(
-                              padding: const EdgeInsets.only(
-                                top: 8,
-                                bottom: 4,
-                                left: 10,
-                                right: 11,
-                              ),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        "Pick Up-",
-                                        style: TextStyle(
-                                          fontSize: 10,
-                                          fontWeight: FontWeight.w600,
-                                        ),
-                                      ),
-                                      Text(
-                                        arrUpcoming[index]["pickUpaddress"],
-                                        style: TextStyle(
-                                          fontSize: 10,
-                                          color: Color(0xff6E7FAA),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  Text(
-                                    arrUpcoming[index]["pickUpdate"],
-                                    style: TextStyle(
-                                      fontSize: 9,
-                                      fontWeight: FontWeight.w500,
-                                      color: Color(0xff343D3C),
-                                    ),
-                                  ),
-                                  Text(
-                                    arrUpcoming[index]["pickUptime"],
-                                    style: TextStyle(
-                                      fontSize: 9,
-                                      fontWeight: FontWeight.w500,
-                                      color: Color(0xff6E7FAA),
-                                    ),
-                                  ),
-                                ],
-                              ),
+                          ),
+                          SizedBox(width: 5),
+                          Expanded(
+                            child: newcont(
+                              date: arrUpcoming[index]["dropOffdate"],
+                              heading: "Drop Off-",
+                              location: arrUpcoming[index]["dropOffaddress"],
+                              time: arrUpcoming[index]["dropOfftime"],
                             ),
                           ),
                         ],
@@ -279,6 +240,59 @@ class _UpcomingScreenState extends State<UpcomingScreen> {
           ),
         );
       },
+    );
+  }
+
+  Widget newcont({
+    required String heading,
+    required String location,
+    required String date,
+    required String time,
+  }) {
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(width: 1, color: Color(0xff94ffdc)),
+        color: Color(0xffe9fff8),
+      ),
+      child: Expanded(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Text(
+                  heading,
+                  style: TextStyle(fontSize: 10, fontWeight: FontWeight.w600),
+                ),
+                Expanded(
+                  child: Text(
+                    location,
+                    style: TextStyle(fontSize: 10, color: Color(0xff6E7FAA)),
+                  ),
+                ),
+              ],
+            ),
+            Text(
+              date,
+              style: TextStyle(
+                fontSize: 9,
+                fontWeight: FontWeight.w500,
+                color: Color(0xff343D3C),
+              ),
+            ),
+            Text(
+              time,
+              style: TextStyle(
+                fontSize: 9,
+                fontWeight: FontWeight.w500,
+                color: Color(0xff6E7FAA),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
