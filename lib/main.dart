@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-
-import 'package:happyeasyrides/screens/my_booking.dart';
+import 'package:happyeasyrides/screens/home_page.dart';
 
 import 'package:happyeasyrides/screens/splash.dart';
-import 'package:happyeasyrides/screens/upcoming_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -27,6 +25,7 @@ class MyApp extends StatelessWidget {
           SplashScreen(),
       //UpcomingScreen(),
       //MyBookingScreen(),
+      //HomePage(),
     );
   }
 }

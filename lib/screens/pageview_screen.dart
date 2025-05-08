@@ -129,12 +129,21 @@ class _PageViewScreenState extends State<PageViewScreen> {
                     padding: EdgeInsets.symmetric(horizontal: 20),
                     child: MaterialButton(
                       onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => LoginScreen(),
-                          ),
-                        );
+                        if (currentPageIndex > 0 - 1) {
+                          if (currentPageIndex == 2) {
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => LoginScreen(),
+                              ),
+                            );
+                          } else {
+                            pageController.nextPage(
+                              duration: Duration(milliseconds: 200),
+                              curve: Curves.easeInOut,
+                            );
+                          }
+                        }
                       },
                       minWidth: double.maxFinite,
                       elevation: 0,

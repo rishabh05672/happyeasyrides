@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class UncompletedScreen extends StatelessWidget {
-  const UncompletedScreen({super.key});
+class CancelledScreen extends StatelessWidget {
+  const CancelledScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

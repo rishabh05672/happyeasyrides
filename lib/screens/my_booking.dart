@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:happyeasyrides/screens/completed_screen.dart';
-import 'package:happyeasyrides/screens/uncompleted_screen.dart';
+import 'package:happyeasyrides/screens/cancelled_screen.dart';
 import 'package:happyeasyrides/screens/upcoming_screen.dart';
 
 class MyBookingScreen extends StatefulWidget {
@@ -10,9 +10,17 @@ class MyBookingScreen extends StatefulWidget {
   State<MyBookingScreen> createState() => _MyBookingScreenState();
 }
 
-class _MyBookingScreenState extends State<MyBookingScreen>
-    with TickerProviderStateMixin {
-  // TabController tabController = TabController(length: 3, vsync: thi)
+class _MyBookingScreenState extends State<MyBookingScreen> {
+  int selectedTab = 0;
+
+  final List _tabControllername = ["Upcoming", "Completed", "Cancelled"];
+
+  final List _screens = [
+    UpcomingScreen(),
+    CompletedScreen(),
+    CancelledScreen(),
+  ];
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -59,53 +67,59 @@ class _MyBookingScreenState extends State<MyBookingScreen>
         body: Column(
           children: [
             Container(
-              margin: EdgeInsets.only(left: 20, right: 20, top: 24),
-              height: 52,
+              margin: EdgeInsets.symmetric(horizontal: 19.5, vertical: 24.5),
+              width: width,
+              height: height * 0.06,
               decoration: BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadius.circular(20),
+                borderRadius: BorderRadius.circular(30),
               ),
-
-              child: TabBar(
-                padding: EdgeInsets.zero,
-                unselectedLabelColor: Color(0xff343D3C),
-                labelColor: Colors.white,
-                labelStyle: TextStyle(
-                  fontSize: 13,
-                  fontWeight: FontWeight.w500,
-                ),
-                unselectedLabelStyle: TextStyle(
-                  fontSize: 13,
-                  fontWeight: FontWeight.w500,
-                ),
-                dividerHeight: 0,
-                indicator: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  color: Color(0xff0077AC),
-                ),
-
-                controller: TabController(length: 3, vsync: this),
-                tabs: [Text("Upcoming"), Text("Completed"), Text("Cancelled")],
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: List.generate(_tabControllername.length, (index) {
+                  return GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        selectedTab = index;
+                      });
+                    },
+                    child: Container(
+                      width: width * 0.3,
+                      decoration: BoxDecoration(
+                        color:
+                            selectedTab == index
+                                ? Color(0xff0077AC)
+                                : Colors.transparent,
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                      child: Center(
+                        child: Text(
+                          _tabControllername[index],
+                          style: TextStyle(
+                            color:
+                                selectedTab == index
+                                    ? Colors.white
+                                    : Color(0xff343D3C),
+                            fontSize: 13,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ),
+                    ),
+                  );
+                }),
               ),
             ),
             Expanded(
               child: Container(
-                margin: EdgeInsets.only(top: 30),
                 decoration: BoxDecoration(
-                  color: Color(0xfff8f8fb),
+                  color: Colors.white,
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(40),
                     topRight: Radius.circular(40),
                   ),
                 ),
-                child: TabBarView(
-                  controller: TabController(length: 3, vsync: this),
-                  children: [
-                    UpcomingScreen(),
-                    CompletedScreen(),
-                    UncompletedScreen(),
-                  ],
-                ),
+                child: _screens[selectedTab],
               ),
             ),
           ],

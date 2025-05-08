@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:happyeasyrides/screens/notification_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -114,30 +115,42 @@ class _HomeScreenState extends State<HomeScreen> {
               actions: [
                 Padding(
                   padding: const EdgeInsets.only(right: 20, bottom: 33),
-                  child: Image.asset(
-                    "assets/img/notification_icon.png",
-                    width: 40,
-                    height: 40,
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => NotificationScreen(),
+                        ),
+                      );
+                    },
+                    child: Image.asset(
+                      "assets/img/notification_icon.png",
+                      width: 40,
+                      height: 40,
+                    ),
                   ),
                 ),
               ],
             ),
+
+            //body
             body: Stack(
               children: [
                 Positioned(
-                  top: 240,
+                  top: 220,
                   child: Container(
                     height: height,
                     width: width,
                     decoration: BoxDecoration(
-                      color: Colors.white,
+                      //color: Color(0xffF8F8FB),
+                      color: Colors.amber, //Remove--------------------------
                       borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(40),
                         topRight: Radius.circular(40),
                       ),
                     ),
                     child: SingleChildScrollView(
-                      scrollDirection: Axis.vertical,
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -153,6 +166,8 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                             ),
                           ),
+
+                          //----------------------------------
                           SizedBox(
                             height: height / 3.8,
                             child: ListView.builder(
@@ -166,7 +181,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     bottom: 30,
                                   ),
                                   child: Container(
-                                    width: width * 0.37,
+                                    width: width * 0.5,
                                     decoration: BoxDecoration(
                                       color: Color(0xff22D6D1),
                                       borderRadius: BorderRadius.circular(40),
@@ -216,6 +231,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               },
                             ),
                           ),
+
                           Container(
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(60),
@@ -239,12 +255,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                       fontWeight: FontWeight.w600,
                                     ),
                                   ),
-                                  Text(
-                                    "View more >",
-                                    style: TextStyle(
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.w500,
-                                      color: Color(0xff16CE92),
+                                  InkWell(
+                                    onTap: () {},
+                                    child: Text(
+                                      "View more >",
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w500,
+                                        color: Color(0xff16CE92),
+                                      ),
                                     ),
                                   ),
                                 ],
@@ -283,7 +302,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           Padding(
                             padding: const EdgeInsets.only(left: 20),
                             child: Text(
-                              "Testimonials",
+                              "Offers at Happyeasy Rides",
                               style: TextStyle(
                                 color: Color(0xff100C08),
                                 fontSize: 18,
@@ -292,8 +311,9 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                           ),
                           SizedBox(height: 13),
+
                           SizedBox(
-                            height: 160,
+                            height: 380,
                             child: ListView.builder(
                               scrollDirection: Axis.horizontal,
                               itemCount: arrTestimonial.length,
@@ -336,6 +356,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                             color: Color(0xff515f65),
                                           ),
                                         ),
+                                        SizedBox(height: 4),
+                                        Container(
+                                          width: 40,
+                                          height: 40,
+                                          decoration: BoxDecoration(
+                                            shape: BoxShape.circle,
+                                            color: Color(0xff05073C),
+                                          ),
+                                        ),
                                       ],
                                     ),
                                   ),
@@ -343,7 +372,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               },
                             ),
                           ),
-                          SizedBox(height: 29),
+                          SizedBox(height: 250),
                         ],
                       ),
                     ),
@@ -371,16 +400,35 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                           child: TextField(
                             decoration: InputDecoration(
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(40),
+                                borderSide: BorderSide(
+                                  width: 1,
+                                  color: Color(0xffE7EBF5),
+                                ),
+                              ),
+                              labelText: "Search city to search",
+                              labelStyle: TextStyle(
+                                color: Color(0xff6E7FAA),
+                                fontSize: 16,
+                              ),
                               border: OutlineInputBorder(
-                                borderSide: BorderSide(width: 1),
+                                borderSide: BorderSide(
+                                  width: 1,
+                                  color: Color(0xffE7EBF5),
+                                ),
                                 borderRadius: BorderRadius.circular(40),
                               ),
                               prefixIcon: SizedBox(
                                 height: 24,
                                 width: 24,
-                                child: Image.asset(
-                                  "assets/img/car_home.png",
-                                  fit: BoxFit.contain,
+                                child: Center(
+                                  child: Image.asset(
+                                    "assets/img/car_home.png",
+                                    height: 24,
+                                    width: 24,
+                                    fit: BoxFit.contain,
+                                  ),
                                 ),
                               ),
                               suffixIcon: Icon(Icons.arrow_drop_down_outlined),

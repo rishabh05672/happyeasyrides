@@ -14,7 +14,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     {"image": "assets/img/first_splash11.png", "name": "Booking History"},
     {"image": "assets/img/second_splash11.png", "name": "Manage Documents"},
     {"image": "assets/img/third_splash11.png", "name": "Profile Verification"},
-    {"image": "assets/img/fourth_splash11.png", "name": "Profile Verification"},
+    {"image": "assets/img/fourth_splash11.png", "name": "Terms & Conditions"},
     {"image": "assets/img/fifth_splash11.png", "name": "Privacy Policy"},
     {
       "image": "assets/img/sixth_splash11.png",

@@ -1,3 +1,4 @@
+import 'package:dotted_dashed_line/dotted_dashed_line.dart';
 import 'package:flutter/material.dart';
 
 class UpcomingScreen extends StatefulWidget {
@@ -82,164 +83,163 @@ class _UpcomingScreenState extends State<UpcomingScreen> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    final height = size.height;
+    //final height = size.height;
     final width = size.width;
-    return ListView.builder(
-      itemCount: arrUpcoming.length,
-      itemBuilder: (context, index) {
-        return Container(
-          margin: EdgeInsets.only(left: 20, right: 20, top: 25),
-          decoration: BoxDecoration(
-            color: Color(0xffffffff),
-            border: Border.all(width: 1, color: Color(0xffe6e6f3)),
-            borderRadius: BorderRadius.circular(20),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 13, vertical: 17),
-            child: Row(
-              children: [
-                Container(
-                  padding: EdgeInsets.only(
-                    left: 13,
-                    right: 11,
-                    top: 16,
-                    bottom: 16,
-                  ),
-                  decoration: BoxDecoration(
-                    color: Color(0xffeff3ff),
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: Container(
-                    padding: EdgeInsets.symmetric(horizontal: 14, vertical: 29),
-                    height: 52,
-                    width: 89,
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage(arrUpcoming[index]["image"]),
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          ...List.generate(arrUpcoming.length, (index) {
+            return Container(
+              margin: EdgeInsets.only(top: 10, right: 20, left: 20),
+              width: width,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                border: Border.all(width: 1, color: Color(0xffE6E6F3)),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 13,
+                  vertical: 15,
+                ),
+                child: Row(
+                  children: [
+                    Container(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 13,
+                        vertical: 20,
+                      ),
+                      decoration: BoxDecoration(
+                        color: Color(0xffEFF3FF),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Image.asset(
+                        arrUpcoming[index]["image"],
+                        width: 89,
+                        height: 52,
                       ),
                     ),
-                  ),
+                    SizedBox(width: 8),
+                    Expanded(
+                      child: Column(
+                        children: [
+                          Row(
+                            children: [
+                              Text(
+                                arrUpcoming[index]["carName"],
+                                style: TextStyle(
+                                  color: Color(0xff121826),
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                              SizedBox(width: 8),
+                              Text(
+                                arrUpcoming[index]["model"],
+                                style: TextStyle(
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              Container(
+                                width: 14,
+                                height: 14,
+                                decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                    image: AssetImage(
+                                      arrUpcoming[index]["gearPic"],
+                                    ),
+                                    fit: BoxFit.fill,
+                                  ),
+                                ),
+                              ),
+                              Text(
+                                arrUpcoming[index]["gear"],
+                                style: TextStyle(
+                                  color: Color(0xff6E7FAA),
+                                  fontSize: 12,
+                                ),
+                              ),
+                              SizedBox(width: 2),
+                              Container(
+                                width: 14,
+                                height: 14,
+                                decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                    image: AssetImage(
+                                      arrUpcoming[index]["fuelPic"],
+                                    ),
+                                    fit: BoxFit.fill,
+                                  ),
+                                ),
+                              ),
+                              Text(
+                                arrUpcoming[index]["fuel"],
+                                style: TextStyle(
+                                  color: Color(0xff6E7FAA),
+                                  fontSize: 12,
+                                ),
+                              ),
+                              SizedBox(width: 2),
+                              Container(
+                                width: 14,
+                                height: 14,
+                                decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                    image: AssetImage(
+                                      arrUpcoming[index]["seatPic"],
+                                    ),
+                                    fit: BoxFit.fill,
+                                  ),
+                                ),
+                              ),
+                              Text(
+                                arrUpcoming[index]["seat"],
+                                style: TextStyle(
+                                  color: Color(0xff6E7FAA),
+                                  fontSize: 12,
+                                ),
+                              ),
+                            ],
+                          ),
+                          SizedBox(height: 4.75),
+                          Row(
+                            children: [
+                              Expanded(
+                                child: newcont(
+                                  date: arrUpcoming[index]["pickUpdate"],
+                                  heading: "Pick Up-",
+                                  location: arrUpcoming[index]["pickUpaddress"],
+                                  time: arrUpcoming[index]["pickUptime"],
+                                ),
+                              ),
+                              SizedBox(width: 8),
+                              Expanded(
+                                child: newcont(
+                                  date: arrUpcoming[index]["dropOffdate"],
+                                  heading: "Drop Off-",
+                                  location:
+                                      arrUpcoming[index]["dropOffaddress"],
+                                  time: arrUpcoming[index]["dropOfftime"],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
-                SizedBox(width: 10),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            arrUpcoming[index]["carName"],
-                            style: TextStyle(
-                              color: Color(0xff121826),
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                          SizedBox(width: 8),
-                          Text(
-                            arrUpcoming[index]["model"],
-                            style: TextStyle(
-                              fontSize: 10,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Container(
-                            width: 14,
-                            height: 14,
-                            decoration: BoxDecoration(
-                              image: DecorationImage(
-                                image: AssetImage(
-                                  arrUpcoming[index]["gearPic"],
-                                ),
-                                fit: BoxFit.fill,
-                              ),
-                            ),
-                          ),
-                          Text(
-                            arrUpcoming[index]["gear"],
-                            style: TextStyle(
-                              color: Color(0xff6E7FAA),
-                              fontSize: 12,
-                            ),
-                          ),
-                          SizedBox(width: 2),
-                          Container(
-                            width: 14,
-                            height: 14,
-                            decoration: BoxDecoration(
-                              image: DecorationImage(
-                                image: AssetImage(
-                                  arrUpcoming[index]["fuelPic"],
-                                ),
-                                fit: BoxFit.fill,
-                              ),
-                            ),
-                          ),
-                          Text(
-                            arrUpcoming[index]["fuel"],
-                            style: TextStyle(
-                              color: Color(0xff6E7FAA),
-                              fontSize: 12,
-                            ),
-                          ),
-                          SizedBox(width: 2),
-                          Container(
-                            width: 14,
-                            height: 14,
-                            decoration: BoxDecoration(
-                              image: DecorationImage(
-                                image: AssetImage(
-                                  arrUpcoming[index]["seatPic"],
-                                ),
-                                fit: BoxFit.fill,
-                              ),
-                            ),
-                          ),
-                          Text(
-                            arrUpcoming[index]["seat"],
-                            style: TextStyle(
-                              color: Color(0xff6E7FAA),
-                              fontSize: 12,
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: 4.75),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: newcont(
-                              date: arrUpcoming[index]["pickUpdate"],
-                              heading: "Pick Up-",
-                              location: arrUpcoming[index]["pickUpaddress"],
-                              time: arrUpcoming[index]["pickUptime"],
-                            ),
-                          ),
-                          SizedBox(width: 5),
-                          Expanded(
-                            child: newcont(
-                              date: arrUpcoming[index]["dropOffdate"],
-                              heading: "Drop Off-",
-                              location: arrUpcoming[index]["dropOffaddress"],
-                              time: arrUpcoming[index]["dropOfftime"],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-        );
-      },
+              ),
+            );
+          }),
+        ],
+      ),
     );
   }
 
@@ -255,7 +255,8 @@ class _UpcomingScreenState extends State<UpcomingScreen> {
         border: Border.all(width: 1, color: Color(0xff94ffdc)),
         color: Color(0xffe9fff8),
       ),
-      child: Expanded(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 8),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -274,6 +275,14 @@ class _UpcomingScreenState extends State<UpcomingScreen> {
                 ),
               ],
             ),
+            SizedBox(height: 4),
+            DottedDashedLine(
+              height: 0.1,
+              width: 100,
+              axis: Axis.horizontal,
+              dashColor: Color(0xff16CE92),
+            ),
+            SizedBox(height: 5),
             Text(
               date,
               style: TextStyle(

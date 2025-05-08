@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:happyeasyrides/screens/coupons.dart';
 import 'package:happyeasyrides/screens/home.dart';
+import 'package:happyeasyrides/screens/home_page.dart';
 import 'package:happyeasyrides/screens/my_booking.dart';
 
 import 'package:happyeasyrides/screens/profile.dart';
@@ -16,7 +17,8 @@ class _CustomBottomNavigationState extends State<CustomBottomNavigation> {
   int selectedTab = 0;
 
   final List _screens = [
-    const HomeScreen(),
+    //const HomeScreen(),
+    const HomePage(),
     const MyBookingScreen(),
     const Coupons(),
     const ProfileScreen(),
