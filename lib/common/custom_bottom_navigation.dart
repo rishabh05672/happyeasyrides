@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:happyeasyrides/screens/coupons.dart';
-import 'package:happyeasyrides/screens/home.dart';
+
 import 'package:happyeasyrides/screens/home_page.dart';
 import 'package:happyeasyrides/screens/my_booking.dart';
 
@@ -44,6 +44,7 @@ class _CustomBottomNavigationState extends State<CustomBottomNavigation> {
       bottomNavigationBar: BottomAppBar(
         notchMargin: 5.0,
         shape: CircularNotchedRectangle(),
+
         height: 80,
         color: Colors.white,
         child: Row(
@@ -57,13 +58,14 @@ class _CustomBottomNavigationState extends State<CustomBottomNavigation> {
               },
               child: Column(
                 children: [
-                  Icon(
-                    Icons.home,
-                    color:
-                        selectedTab == 0
-                            ? Color(0xff16ce92)
-                            : Color(0xff686E82),
+                  Image.asset(
+                    width: 24.03,
+                    height: 23.99,
+                    selectedTab == 0
+                        ? "assets/img/selected_home_bottom.png"
+                        : "assets/img/home_bottom.png",
                   ),
+
                   Text(
                     "Home",
                     style: TextStyle(
@@ -75,9 +77,19 @@ class _CustomBottomNavigationState extends State<CustomBottomNavigation> {
                               : Color(0xff686E82),
                     ),
                   ),
+                  SizedBox(height: 10),
+                  Container(
+                    width: MediaQuery.of(context).size.width * 0.14,
+                    height: 3,
+                    decoration: BoxDecoration(
+                      color:
+                          selectedTab == 0 ? Color(0xff16ce92) : Colors.white,
+                    ),
+                  ),
                 ],
               ),
             ),
+
             GestureDetector(
               onTap: () {
                 setState(() {
@@ -86,13 +98,14 @@ class _CustomBottomNavigationState extends State<CustomBottomNavigation> {
               },
               child: Column(
                 children: [
-                  Icon(
-                    Icons.book,
-                    color:
-                        selectedTab == 1
-                            ? Color(0xff16ce92)
-                            : Color(0xff686E82),
+                  Image.asset(
+                    width: 20.44,
+                    height: 24.03,
+                    selectedTab == 1
+                        ? "assets/img/selected_booking_bottom.png"
+                        : "assets/img/booking_bottom.png",
                   ),
+
                   Text(
                     "My Booking",
                     style: TextStyle(
@@ -104,9 +117,19 @@ class _CustomBottomNavigationState extends State<CustomBottomNavigation> {
                               : Color(0xff686E82),
                     ),
                   ),
+                  SizedBox(height: 10),
+                  Container(
+                    width: MediaQuery.of(context).size.width * 0.14,
+                    height: 3,
+                    decoration: BoxDecoration(
+                      color:
+                          selectedTab == 1 ? Color(0xff16ce92) : Colors.white,
+                    ),
+                  ),
                 ],
               ),
             ),
+
             GestureDetector(
               onTap: () {
                 setState(() {
@@ -115,12 +138,12 @@ class _CustomBottomNavigationState extends State<CustomBottomNavigation> {
               },
               child: Column(
                 children: [
-                  Icon(
-                    Icons.discount,
-                    color:
-                        selectedTab == 2
-                            ? Color(0xff16ce92)
-                            : Color(0xff686E82),
+                  Image.asset(
+                    width: 24.81,
+                    height: 24.8,
+                    selectedTab == 2
+                        ? "assets/img/selected_offer_bottom.png"
+                        : "assets/img/offers_bottom.png",
                   ),
                   Text(
                     "Offer",
@@ -131,6 +154,15 @@ class _CustomBottomNavigationState extends State<CustomBottomNavigation> {
                           selectedTab == 2
                               ? Color(0xff16ce92)
                               : Color(0xff686E82),
+                    ),
+                  ),
+                  SizedBox(height: 10),
+                  Container(
+                    width: MediaQuery.of(context).size.width * 0.14,
+                    height: 3,
+                    decoration: BoxDecoration(
+                      color:
+                          selectedTab == 2 ? Color(0xff16ce92) : Colors.white,
                     ),
                   ),
                 ],
@@ -144,12 +176,12 @@ class _CustomBottomNavigationState extends State<CustomBottomNavigation> {
               },
               child: Column(
                 children: [
-                  Icon(
-                    Icons.account_circle,
-                    color:
-                        selectedTab == 3
-                            ? Color(0xff16ce92)
-                            : Color(0xff686E82),
+                  Image.asset(
+                    width: 16.53,
+                    height: 24,
+                    selectedTab == 3
+                        ? "assets/img/selected_profile_bottom.png"
+                        : "assets/img/profile_bottom.png",
                   ),
                   Text(
                     "Profile",
@@ -160,6 +192,15 @@ class _CustomBottomNavigationState extends State<CustomBottomNavigation> {
                           selectedTab == 3
                               ? Color(0xff16ce92)
                               : Color(0xff686E82),
+                    ),
+                  ),
+                  SizedBox(height: 10),
+                  Container(
+                    width: MediaQuery.of(context).size.width * 0.14,
+                    height: 3,
+                    decoration: BoxDecoration(
+                      color:
+                          selectedTab == 3 ? Color(0xff16ce92) : Colors.white,
                     ),
                   ),
                 ],

@@ -1,20 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:happyeasyrides/provider/login_provider.dart';
 
 import 'package:happyeasyrides/screens/login_success.dart';
 
 import 'package:pin_code_fields/pin_code_fields.dart';
+import 'package:provider/provider.dart';
 
 class OtpVerificationScreen extends StatefulWidget {
-  final String phoneNumber;
-  const OtpVerificationScreen({super.key, required this.phoneNumber});
+  const OtpVerificationScreen({super.key});
 
   @override
   State<OtpVerificationScreen> createState() => _OtpVerificationScreenState();
 }
 
 class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
+  late String phoneNumber;
   @override
   Widget build(BuildContext context) {
+    phoneNumber = Provider.of<LoginProvider>(context).phoneNumber;
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
@@ -102,13 +105,19 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                     height: 16.04,
                   ),
                   SizedBox(width: 3.86),
-                  Text(
-                    widget.phoneNumber,
-                    style: TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.w500,
-                      color: Color(0xff343D3C),
-                    ),
+                  Consumer(
+                    // ignore: avoid_types_as_parameter_names
+                    builder: (context, LoginProvider, child) {
+                      return Text(
+                        // ignore: unnecessary_string_interpolations
+                        "$phoneNumber",
+                        style: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w500,
+                          color: Color(0xff343D3C),
+                        ),
+                      );
+                    },
                   ),
                   SizedBox(width: screenWidth * 0.01),
                   GestureDetector(
@@ -135,15 +144,20 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
               appContext: context,
               blinkWhenObscuring: true,
               cursorColor: Color(0xffCCD7E8),
+              textStyle: TextStyle(
+                color: Color(0xffCCD7E8),
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
               pastedTextStyle: TextStyle(
-                color: Color(0xffccd7e8),
+                color: Color(0xffCCD7E8),
                 fontWeight: FontWeight.bold,
               ),
               pinTheme: PinTheme(
                 shape: PinCodeFieldShape.box,
-                borderRadius: BorderRadius.circular(30),
-                fieldHeight: 65,
-                fieldWidth: 70,
+                borderRadius: BorderRadius.circular(50),
+                fieldHeight: MediaQuery.of(context).size.height * 0.06,
+                fieldWidth: MediaQuery.of(context).size.width * 0.19,
                 activeFillColor: Color(0xffCCD7E8),
                 inactiveFillColor: Color(0xffffffff),
                 selectedFillColor: Color(0xffffffff),

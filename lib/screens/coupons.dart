@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:happyeasyrides/screens/notification_screen.dart';
 
 class Coupons extends StatefulWidget {
   const Coupons({super.key});
@@ -69,6 +70,24 @@ class _CouponsState extends State<Coupons> {
             icon: Icon(Icons.arrow_back_sharp, color: Colors.white, size: 21),
           ),
         ),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(top: 5, right: 20, bottom: 20),
+            child: GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => NotificationScreen()),
+                );
+              },
+              child: Image.asset(
+                "assets/img/notification_icon.png",
+                width: MediaQuery.of(context).size.width * 0.09,
+                height: MediaQuery.of(context).size.height * 0.04,
+              ),
+            ),
+          ),
+        ],
       ),
       //Body
       body: Column(

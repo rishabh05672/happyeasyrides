@@ -26,6 +26,7 @@ class _MyBookingScreenState extends State<MyBookingScreen> {
     Size size = MediaQuery.of(context).size;
     final height = size.height;
     final width = size.width;
+
     return Container(
       decoration: BoxDecoration(
         gradient: LinearGradient(
@@ -34,40 +35,55 @@ class _MyBookingScreenState extends State<MyBookingScreen> {
       ),
       child: Scaffold(
         backgroundColor: Colors.transparent,
-        appBar: AppBar(
-          automaticallyImplyLeading: false,
-          backgroundColor: Colors.transparent,
-          flexibleSpace: Container(
-            width: width,
-            height: height * 0.11,
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage("assets/img/greentop_coupons.png"),
-                fit: BoxFit.fill,
-              ),
-            ),
-          ),
-          leading: InkWell(
-            onTap: () {
-              Navigator.pop(context);
-            },
-            child: Icon(Icons.arrow_back, color: Colors.white, size: 21),
-          ),
-          title: Text(
-            "MY BOOKINGS",
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 20,
-              fontFamily: "Poppins",
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-          centerTitle: true,
-        ),
         body: Column(
           children: [
+            Stack(
+              children: [
+                Image.asset(
+                  "assets/img/greentop_coupons.png",
+                  width: width,
+                  height: height * 0.11,
+                  fit: BoxFit.fill,
+                ),
+                Padding(
+                  padding: EdgeInsets.only(
+                    left: width * 0.05,
+                    bottom: height * 0.04,
+                    top: height * 0.05,
+                  ),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
+                        child: Image.asset(
+                          "assets/img/Icon feather-arrow-right.png",
+                          width: width * 0.06,
+                          height: width * 0.06,
+                        ),
+                      ),
+                      SizedBox(width: width * 0.24),
+                      Text(
+                        "MY BOOKINGS",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                          fontFamily: "Poppins",
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
             Container(
-              margin: EdgeInsets.symmetric(horizontal: 19.5, vertical: 24.5),
+              margin: EdgeInsets.symmetric(
+                horizontal: width * 0.05,
+                vertical: height * 0.03,
+              ),
               width: width,
               height: height * 0.06,
               decoration: BoxDecoration(

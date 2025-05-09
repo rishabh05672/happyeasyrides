@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:happyeasyrides/provider/login_provider.dart';
+import 'package:provider/provider.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -26,6 +28,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
+    String phoneNumber = Provider.of<LoginProvider>(context).phoneNumber;
     Size size = MediaQuery.of(context).size;
     final height = size.height;
     final width = size.width;
@@ -110,7 +113,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(100),
                             border: Border.all(
-                              width: 2,
+                              width: 4,
                               color: Color(0xff000231),
                             ),
                           ),
@@ -149,7 +152,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             ),
                             SizedBox(width: 2),
                             Text(
-                              "+911234512345",
+                              "$phoneNumber" ?? "",
                               style: TextStyle(
                                 fontSize: 18,
                                 fontWeight: FontWeight.w500,
@@ -164,7 +167,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     Flexible(
                       child: Container(
                         margin: EdgeInsets.only(top: 42),
-
                         width: width,
                         decoration: BoxDecoration(
                           color: Colors.white,

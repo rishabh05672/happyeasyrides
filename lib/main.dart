@@ -1,10 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:happyeasyrides/screens/home_page.dart';
-
+import 'package:happyeasyrides/provider/home_page_provider.dart';
+import 'package:happyeasyrides/provider/login_provider.dart';
+import 'package:happyeasyrides/provider/notification_provider.dart';
+import 'package:happyeasyrides/provider/upcoming_provider.dart';
 import 'package:happyeasyrides/screens/splash.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => NotificationProvider()),
+        ChangeNotifierProvider(create: (context) => HomePageProvider()),
+        ChangeNotifierProvider(create: (context) => UpcomingProvider()),
+        ChangeNotifierProvider(create: (context) => LoginProvider()),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {

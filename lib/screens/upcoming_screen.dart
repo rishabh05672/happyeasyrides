@@ -1,5 +1,7 @@
 import 'package:dotted_dashed_line/dotted_dashed_line.dart';
 import 'package:flutter/material.dart';
+import 'package:happyeasyrides/provider/upcoming_provider.dart';
+import 'package:provider/provider.dart';
 
 class UpcomingScreen extends StatefulWidget {
   const UpcomingScreen({super.key});
@@ -9,235 +11,185 @@ class UpcomingScreen extends StatefulWidget {
 }
 
 class _UpcomingScreenState extends State<UpcomingScreen> {
-  List arrUpcoming = [
-    {
-      "image": "assets/img/car1_mybooking.png",
-      "carName": "Maruti Swift",
-      "model": "(Model Apr 2020)",
-      "gear": "Automatic",
-      "gearPic": "assets/img/gear_mybooking.png",
-      "fuelPic": "assets/img/fuel_mybooking.png",
-      "seatPic": "assets/img/seat_mybooking.png",
-      "fuel": "Petrol",
-      "seat": "7 Seats",
-      "pickUpaddress": "Delhi-NCR",
-      "pickUpdate": "Mon, 06 Jan 2025",
-      "pickUptime": "09:30 AM",
-      "dropOffaddress": "Delhi-NCR",
-      "dropOffdate": "Mon, 07 Tue 2025",
-      "dropOfftime": "11:30 PM",
-    },
-    {
-      "image": "assets/img/car2_mybooking.png",
-      "carName": "Maruti Swift",
-      "model": "(Model Apr 2020)",
-      "gearPic": "assets/img/gear_mybooking.png",
-      "fuelPic": "assets/img/fuel_mybooking.png",
-      "seatPic": "assets/img/seat_mybooking.png",
-      "gear": "Automatic",
-      "fuel": "Petrol",
-      "seat": "7 Seats",
-      "pickUpaddress": "Delhi-NCR",
-      "pickUpdate": "Mon, 06 Jan 2025",
-      "pickUptime": "09:30 AM",
-      "dropOffaddress": "Delhi-NCR",
-      "dropOffdate": "Mon, 07 Tue 2025",
-      "dropOfftime": "11:30 PM",
-    },
-    {
-      "image": "assets/img/car3_mybooking.png",
-      "carName": "Maruti Swift",
-      "model": "(Model Apr 2020)",
-      "gearPic": "assets/img/gear_mybooking.png",
-      "fuelPic": "assets/img/fuel_mybooking.png",
-      "seatPic": "assets/img/seat_mybooking.png",
-      "gear": "Automatic",
-      "fuel": "Petrol",
-      "seat": "7 Seats",
-      "pickUpaddress": "Delhi-NCR",
-      "pickUpdate": "Mon, 06 Jan 2025",
-      "pickUptime": "09:30 AM",
-      "dropOffaddress": "Delhi-NCR",
-      "dropOffdate": "Mon, 07 Tue 2025",
-      "dropOfftime": "11:30 PM",
-    },
-    {
-      "image": "assets/img/car4_mybooking.png",
-      "carName": "Maruti Swift",
-      "model": "(Model Apr 2020)",
-      "gearPic": "assets/img/gear_mybooking.png",
-      "fuelPic": "assets/img/fuel_mybooking.png",
-      "seatPic": "assets/img/seat_mybooking.png",
-      "gear": "Automatic",
-      "fuel": "Petrol",
-      "seat": "7 Seats",
-      "pickUpaddress": "Delhi-NCR",
-      "pickUpdate": "Mon, 06 Jan 2025",
-      "pickUptime": "09:30 AM",
-      "dropOffaddress": "Delhi-NCR",
-      "dropOffdate": "Mon, 07 Tue 2025",
-      "dropOfftime": "11:30 PM",
-    },
-  ];
-
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    //final height = size.height;
     final width = size.width;
+
     return SingleChildScrollView(
       child: Column(
         children: [
-          ...List.generate(arrUpcoming.length, (index) {
-            return Container(
-              margin: EdgeInsets.only(top: 10, right: 20, left: 20),
-              width: width,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                border: Border.all(width: 1, color: Color(0xffE6E6F3)),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 13,
-                  vertical: 15,
-                ),
-                child: Row(
-                  children: [
-                    Container(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 13,
-                        vertical: 20,
-                      ),
-                      decoration: BoxDecoration(
-                        color: Color(0xffEFF3FF),
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: Image.asset(
-                        arrUpcoming[index]["image"],
-                        width: 89,
-                        height: 52,
-                      ),
+          Consumer<UpcomingProvider>(
+            builder: (context, upcomingProvider, child) {
+              final upcomingArr = upcomingProvider.arrUpcoming;
+
+              return Column(
+                children: List.generate(upcomingArr.length, (index) {
+                  return Container(
+                    margin: EdgeInsets.only(top: 10, right: 20, left: 20),
+                    width: width,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      border: Border.all(width: 1, color: Color(0xffE6E6F3)),
                     ),
-                    SizedBox(width: 8),
-                    Expanded(
-                      child: Column(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 13,
+                        vertical: 15,
+                      ),
+                      child: Row(
                         children: [
-                          Row(
-                            children: [
-                              Text(
-                                arrUpcoming[index]["carName"],
-                                style: TextStyle(
-                                  color: Color(0xff121826),
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                              SizedBox(width: 8),
-                              Text(
-                                arrUpcoming[index]["model"],
-                                style: TextStyle(
-                                  fontSize: 10,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                            ],
+                          Container(
+                            padding: EdgeInsets.symmetric(
+                              horizontal: 13,
+                              vertical: 20,
+                            ),
+                            decoration: BoxDecoration(
+                              color: Color(0xffEFF3FF),
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            child: Image.asset(
+                              upcomingArr[index]["image"] ?? "",
+                              width: 89,
+                              height: 52,
+                            ),
                           ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              Container(
-                                width: 14,
-                                height: 14,
-                                decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                    image: AssetImage(
-                                      arrUpcoming[index]["gearPic"],
+                          SizedBox(width: 8),
+                          Expanded(
+                            child: Column(
+                              children: [
+                                Row(
+                                  children: [
+                                    Text(
+                                      upcomingArr[index]["carName"] ?? "",
+                                      style: TextStyle(
+                                        color: Color(0xff121826),
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                      overflow: TextOverflow.ellipsis,
                                     ),
-                                    fit: BoxFit.fill,
-                                  ),
-                                ),
-                              ),
-                              Text(
-                                arrUpcoming[index]["gear"],
-                                style: TextStyle(
-                                  color: Color(0xff6E7FAA),
-                                  fontSize: 12,
-                                ),
-                              ),
-                              SizedBox(width: 2),
-                              Container(
-                                width: 14,
-                                height: 14,
-                                decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                    image: AssetImage(
-                                      arrUpcoming[index]["fuelPic"],
+                                    SizedBox(width: 8),
+                                    Text(
+                                      upcomingArr[index]["model"] ?? "",
+                                      style: TextStyle(
+                                        fontSize: 10,
+                                        fontWeight: FontWeight.w500,
+                                      ),
                                     ),
-                                    fit: BoxFit.fill,
-                                  ),
+                                  ],
                                 ),
-                              ),
-                              Text(
-                                arrUpcoming[index]["fuel"],
-                                style: TextStyle(
-                                  color: Color(0xff6E7FAA),
-                                  fontSize: 12,
-                                ),
-                              ),
-                              SizedBox(width: 2),
-                              Container(
-                                width: 14,
-                                height: 14,
-                                decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                    image: AssetImage(
-                                      arrUpcoming[index]["seatPic"],
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  children: [
+                                    Container(
+                                      width: 14,
+                                      height: 14,
+                                      decoration: BoxDecoration(
+                                        image: DecorationImage(
+                                          image: AssetImage(
+                                            upcomingArr[index]["gearPic"] ?? "",
+                                          ),
+                                          fit: BoxFit.fill,
+                                        ),
+                                      ),
                                     ),
-                                    fit: BoxFit.fill,
-                                  ),
+                                    Text(
+                                      upcomingArr[index]["gear"] ?? "",
+                                      style: TextStyle(
+                                        color: Color(0xff6E7FAA),
+                                        fontSize: 12,
+                                      ),
+                                    ),
+                                    SizedBox(width: 2),
+                                    Container(
+                                      width: 14,
+                                      height: 14,
+                                      decoration: BoxDecoration(
+                                        image: DecorationImage(
+                                          image: AssetImage(
+                                            upcomingArr[index]["fuelPic"] ?? "",
+                                          ),
+                                          fit: BoxFit.fill,
+                                        ),
+                                      ),
+                                    ),
+                                    Text(
+                                      upcomingArr[index]["fuel"] ?? "",
+                                      style: TextStyle(
+                                        color: Color(0xff6E7FAA),
+                                        fontSize: 12,
+                                      ),
+                                    ),
+                                    SizedBox(width: 2),
+                                    Container(
+                                      width: 14,
+                                      height: 14,
+                                      decoration: BoxDecoration(
+                                        image: DecorationImage(
+                                          image: AssetImage(
+                                            upcomingArr[index]["seatPic"] ?? "",
+                                          ),
+                                          fit: BoxFit.fill,
+                                        ),
+                                      ),
+                                    ),
+                                    Text(
+                                      upcomingArr[index]["seat"] ?? "",
+                                      style: TextStyle(
+                                        color: Color(0xff6E7FAA),
+                                        fontSize: 12,
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                              ),
-                              Text(
-                                arrUpcoming[index]["seat"],
-                                style: TextStyle(
-                                  color: Color(0xff6E7FAA),
-                                  fontSize: 12,
+                                SizedBox(height: 4.75),
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      child: newcont(
+                                        date:
+                                            upcomingArr[index]["pickUpdate"] ??
+                                            "",
+                                        heading: "Pick Up-",
+                                        location:
+                                            upcomingArr[index]["pickUpaddress"] ??
+                                            "",
+                                        time:
+                                            upcomingArr[index]["pickUptime"] ??
+                                            "",
+                                      ),
+                                    ),
+                                    SizedBox(width: 8),
+                                    Expanded(
+                                      child: newcont(
+                                        date:
+                                            upcomingArr[index]["dropOffdate"] ??
+                                            "",
+                                        heading: "Drop Off-",
+                                        location:
+                                            upcomingArr[index]["dropOffaddress"] ??
+                                            "",
+                                        time:
+                                            upcomingArr[index]["dropOfftime"] ??
+                                            "",
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                              ),
-                            ],
-                          ),
-                          SizedBox(height: 4.75),
-                          Row(
-                            children: [
-                              Expanded(
-                                child: newcont(
-                                  date: arrUpcoming[index]["pickUpdate"],
-                                  heading: "Pick Up-",
-                                  location: arrUpcoming[index]["pickUpaddress"],
-                                  time: arrUpcoming[index]["pickUptime"],
-                                ),
-                              ),
-                              SizedBox(width: 8),
-                              Expanded(
-                                child: newcont(
-                                  date: arrUpcoming[index]["dropOffdate"],
-                                  heading: "Drop Off-",
-                                  location:
-                                      arrUpcoming[index]["dropOffaddress"],
-                                  time: arrUpcoming[index]["dropOfftime"],
-                                ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         ],
                       ),
                     ),
-                  ],
-                ),
-              ),
-            );
-          }),
+                  );
+                }),
+              );
+            },
+          ),
+          SizedBox(height: 10),
         ],
       ),
     );
@@ -258,9 +210,11 @@ class _UpcomingScreenState extends State<UpcomingScreen> {
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 8),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Text(
@@ -276,11 +230,25 @@ class _UpcomingScreenState extends State<UpcomingScreen> {
               ],
             ),
             SizedBox(height: 4),
-            DottedDashedLine(
-              height: 0.1,
-              width: 100,
-              axis: Axis.horizontal,
-              dashColor: Color(0xff16CE92),
+            Row(
+              children: [
+                Container(
+                  width: 6,
+                  height: 6,
+                  decoration: BoxDecoration(
+                    color: Color(0xff16CE92),
+                    shape: BoxShape.circle,
+                  ),
+                ),
+                Expanded(
+                  child: DottedDashedLine(
+                    width: 10,
+                    height: .15,
+                    axis: Axis.horizontal,
+                    dashColor: Color(0xff16CE92),
+                  ),
+                ),
+              ],
             ),
             SizedBox(height: 5),
             Text(

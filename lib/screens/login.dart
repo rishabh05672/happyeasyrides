@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:happyeasyrides/provider/login_provider.dart';
 import 'package:happyeasyrides/screens/otp_verification.dart';
+import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -162,12 +164,12 @@ class _LoginScreenState extends State<LoginScreen> {
             child: ElevatedButton(
               onPressed: () {
                 String phoneNumber = (phoneController.text);
+                Provider.of<LoginProvider>(context, listen: false).phoneNumber =
+                    phoneNumber;
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder:
-                        (context) =>
-                            OtpVerificationScreen(phoneNumber: phoneNumber),
+                    builder: (context) => OtpVerificationScreen(),
                   ),
                 );
               },
