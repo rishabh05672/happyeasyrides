@@ -12,8 +12,7 @@ class NotificationScreen extends StatefulWidget {
 class _NotificationScreenState extends State<NotificationScreen> {
   @override
   Widget build(BuildContext context) {
-    final notifications =
-        Provider.of<NotificationProvider>(context).notifications;
+    final provider = Provider.of<NotificationProvider>(context);
     Size size = MediaQuery.of(context).size;
     final height = size.height;
     final width = size.width;
@@ -69,6 +68,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
             right: 0,
             bottom: 0,
             child: Container(
+              padding: EdgeInsets.only(left: 20, right: 20, top: 20),
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.only(
@@ -76,65 +76,92 @@ class _NotificationScreenState extends State<NotificationScreen> {
                   topRight: Radius.circular(40),
                 ),
               ),
-              child: ListView.builder(
-                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-                itemCount: notifications.length,
-                itemBuilder: (context, index) {
-                  final notification = notifications[index];
-                  return Container(
-                    margin: EdgeInsets.only(bottom: 10),
-                    width: width,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      border: Border.all(width: 1, color: Color(0xffefefef)),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 10,
-                        vertical: 18,
-                      ),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          CircleAvatar(
-                            backgroundColor: Color(0xff05073C),
-                            radius: 30,
-                            child: Image.asset(
-                              notification["image"] ?? "",
-                              width: 21,
-                              height: 22,
-                            ),
-                          ),
-                          SizedBox(width: 9),
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  notification["title"] ?? "",
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 15,
-                                    fontFamily: "Poppins",
-                                  ),
-                                ),
-                                SizedBox(height: 4),
-                                Text(
-                                  notification["subtitle"] ?? "",
-                                  overflow: TextOverflow.visible,
-                                  style: TextStyle(
-                                    fontSize: 10,
-                                    color: Color(0xff515F65),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Today",
+                      style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.w600,
+                        color: Color(0xff100C08),
                       ),
                     ),
-                  );
-                },
+                    SizedBox(height: 7),
+                    ...List.generate(provider.notifications.length, (index) {
+                      return Container(
+                        margin: EdgeInsets.only(bottom: 10),
+                        width: width,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          border: Border.all(
+                            width: 1,
+                            color: Color(0xffefefef),
+                          ),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 10,
+                            vertical: 18,
+                          ),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              CircleAvatar(
+                                backgroundColor: Color(0xff05073C),
+                                radius: 30,
+                                child: Image.asset(
+                                  provider.notifications[index]["image"] ?? "",
+                                  width: 21,
+                                  height: 22,
+                                ),
+                              ),
+                              SizedBox(width: 9),
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      provider.notifications[index]["title"] ??
+                                          "",
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 15,
+                                        fontFamily: "Poppins",
+                                      ),
+                                    ),
+                                    SizedBox(height: 4),
+                                    Text(
+                                      provider.notifications[index]["subtitle"] ??
+                                          "",
+                                      overflow: TextOverflow.visible,
+                                      style: TextStyle(
+                                        fontSize: 10,
+                                        color: Color(0xff515F65),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      );
+                    }),
+                    // Expanded(
+                    //   child: ListView.builder(
+                    //     //padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                    //     itemCount: notifications.length,
+                    //     itemBuilder: (context, index) {
+                    //       final notification = notifications[index];
+                    //       return
+
+                    //     },
+                    //   ),
+                    // ),
+                  ],
+                ),
               ),
             ),
           ),

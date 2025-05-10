@@ -46,9 +46,4 @@ class NotificationProvider with ChangeNotifier {
     },
   ];
   List<Map<String, String>> get notifications => _notifications;
-
-  void clearNotification() {
-    notifications.clear();
-    notifyListeners();
-  }
 }

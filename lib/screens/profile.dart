@@ -150,9 +150,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               height: 23,
                               color: Color(0xff05073C),
                             ),
-                            SizedBox(width: 2),
+                            SizedBox(width: 4.94),
                             Text(
-                              "$phoneNumber" ?? "",
+                              "$phoneNumber",
                               style: TextStyle(
                                 fontSize: 18,
                                 fontWeight: FontWeight.w500,
@@ -167,6 +167,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     Flexible(
                       child: Container(
                         margin: EdgeInsets.only(top: 42),
+                        padding: EdgeInsets.only(top: 34),
                         width: width,
                         decoration: BoxDecoration(
                           color: Colors.white,

@@ -14,7 +14,7 @@ class OtpVerificationScreen extends StatefulWidget {
 }
 
 class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
-  late String phoneNumber;
+  String? phoneNumber;
   @override
   Widget build(BuildContext context) {
     phoneNumber = Provider.of<LoginProvider>(context).phoneNumber;

@@ -128,6 +128,7 @@ class _MyBookingScreenState extends State<MyBookingScreen> {
             ),
             Expanded(
               child: Container(
+                padding: EdgeInsets.only(top: 28.6),
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(
