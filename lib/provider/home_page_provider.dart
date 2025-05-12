@@ -25,6 +25,7 @@ class HomePageProvider with ChangeNotifier {
   final List<Map<String, String>> _arrOffer = [
     {"image": "assets/img/offers_home.png"},
     {"image": "assets/img/offers_home.png"},
+    {"image": "assets/img/offers_home.png"},
   ];
 
   List<Map<String, String>> get arrOffer => _arrOffer;

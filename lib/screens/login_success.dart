@@ -132,13 +132,14 @@ class LoginSuccessScreen extends StatelessWidget {
                                 height: 54,
                                 child: ElevatedButton(
                                   onPressed: () {
-                                    Navigator.pushReplacement(
+                                    Navigator.pushAndRemoveUntil(
                                       context,
                                       MaterialPageRoute(
                                         builder:
                                             (context) =>
                                                 CustomBottomNavigation(),
                                       ),
+                                      (route) => false,
                                     );
                                   },
                                   style: ElevatedButton.styleFrom(

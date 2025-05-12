@@ -15,23 +15,27 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     Timer(Duration(seconds: 3), () {
-      Navigator.pushReplacement(
+      Navigator.pushAndRemoveUntil(
         context,
         MaterialPageRoute(builder: (context) => PageViewScreen()),
+        (route) => false,
       );
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    final height = size.height;
+    final width = size.width;
     return Scaffold(
       body: Stack(
         children: [
           Image.asset(
             "assets/img/background_splash.png",
             fit: BoxFit.cover,
-            width: double.infinity,
-            height: double.infinity,
+            width: width,
+            height: height,
           ),
 
           Center(
@@ -41,8 +45,8 @@ class _SplashScreenState extends State<SplashScreen> {
                 Image.asset(
                   "assets/img/logo_splash.png",
                   fit: BoxFit.cover,
-                  width: 142,
-                  height: 149,
+                  width: width * 0.32,
+                  height: height * 0.14,
                 ),
 
                 Image.asset("assets/img/bg_splash.png"),

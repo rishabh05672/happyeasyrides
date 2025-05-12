@@ -31,8 +31,13 @@ class _PageViewScreenState extends State<PageViewScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    final height = size.height;
+    final width = size.width;
     return Scaffold(
+      backgroundColor: Color(0xffe3f9f2),
       appBar: AppBar(
+        backgroundColor: Color(0xffe3f9f2),
         actions: [
           TextButton(
             onPressed: () {
@@ -69,8 +74,8 @@ class _PageViewScreenState extends State<PageViewScreen> {
                   Spacer(),
                   Image.asset(
                     splashData[index]['image'],
-                    width: 274,
-                    height: 276,
+                    width: width * 0.62,
+                    height: height * 0.28,
                     fit: BoxFit.fill,
                   ),
                   SizedBox(height: 41),

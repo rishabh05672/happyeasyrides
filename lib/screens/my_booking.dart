@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:happyeasyrides/common/custom_bottom_navigation.dart';
 import 'package:happyeasyrides/screens/completed_screen.dart';
 import 'package:happyeasyrides/screens/cancelled_screen.dart';
 import 'package:happyeasyrides/screens/upcoming_screen.dart';
@@ -56,7 +57,12 @@ class _MyBookingScreenState extends State<MyBookingScreen> {
                     children: [
                       GestureDetector(
                         onTap: () {
-                          Navigator.pop(context);
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => CustomBottomNavigation(),
+                            ),
+                          );
                         },
                         child: Image.asset(
                           "assets/img/Icon feather-arrow-right.png",
@@ -130,7 +136,7 @@ class _MyBookingScreenState extends State<MyBookingScreen> {
               child: Container(
                 padding: EdgeInsets.only(top: 28.6),
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: Color(0xffF8F8FB),
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(40),
                     topRight: Radius.circular(40),

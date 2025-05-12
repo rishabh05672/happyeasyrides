@@ -15,6 +15,16 @@ class _LoginScreenState extends State<LoginScreen> {
   bool isTick = false;
 
   @override
+  void initState() {
+    super.initState();
+    phoneController.addListener(() {
+      setState(() {
+        isTick = phoneController.text.length == 10;
+      });
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
@@ -82,26 +92,40 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
           ),
           SizedBox(height: screenHeight * 0.09),
-          Padding(
-            padding: EdgeInsets.only(
-              left: screenWidth * 0.06,
-              right: screenWidth * 0.06,
+          Container(
+            margin: EdgeInsets.symmetric(horizontal: 27),
+            decoration: BoxDecoration(
+              boxShadow: [
+                BoxShadow(
+                  blurRadius: 15,
+                  offset: Offset(0, 5),
+                  color: Colors.white.withOpacity(0.5),
+                ),
+              ],
             ),
-
-            //Textfield for Phone Number
             child: TextField(
               controller: phoneController,
               keyboardType: TextInputType.phone,
               maxLength: 10,
 
               decoration: InputDecoration(
+                fillColor: Colors.white,
+                filled: true,
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(50),
+                  borderSide: BorderSide(color: Colors.white, width: 1),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(50),
+                  borderSide: BorderSide(color: Colors.white, width: 1),
+                ),
                 counterText: "",
-                hintText: "Enter Your Mobile Number",
+                hintText: "",
                 hintStyle: TextStyle(
-                  fontSize: 16,
+                  fontSize: 18,
                   fontWeight: FontWeight.w400,
                   fontFamily: "Poppins",
-                  color: Color(0xff24272B),
+                  color: Colors.white,
                 ),
                 prefixIcon: Padding(
                   padding: EdgeInsets.only(top: 19, left: 26.4, bottom: 17.98),
@@ -141,15 +165,25 @@ class _LoginScreenState extends State<LoginScreen> {
                   borderRadius: BorderRadius.circular(50),
                   borderSide: BorderSide(color: Colors.white, width: 1),
                 ),
-                suffixIcon: Padding(
-                  padding: EdgeInsets.only(right: 20, top: 20, bottom: 20),
-                  child: Image.asset(
-                    "assets/img/righttick_textfield.png",
-                    fit: BoxFit.contain,
-                    width: 24,
-                    height: 24,
-                  ),
-                ),
+                // suffix Icon
+                suffixIcon:
+                    phoneController.text.isEmpty
+                        ? null
+                        : Padding(
+                          padding: EdgeInsets.only(
+                            right: 20,
+                            top: 20,
+                            bottom: 20,
+                          ),
+                          child: Image.asset(
+                            isTick
+                                ? "assets/img/righttick_textfield.png"
+                                : "assets/img/close+icon.png",
+                            fit: BoxFit.contain,
+                            width: 24,
+                            height: 24,
+                          ),
+                        ),
               ),
             ),
           ),

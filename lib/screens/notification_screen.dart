@@ -63,12 +63,12 @@ class _NotificationScreenState extends State<NotificationScreen> {
             ),
           ),
           Positioned(
-            top: height * 0.13,
+            top: height * 0.15,
             left: 0,
             right: 0,
             bottom: 0,
             child: Container(
-              padding: EdgeInsets.only(left: 20, right: 20, top: 20),
+              padding: EdgeInsets.only(left: 20, right: 20, top: 35),
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.only(
@@ -149,6 +149,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                         ),
                       );
                     }),
+                    SizedBox(height: 10),
                     // Expanded(
                     //   child: ListView.builder(
                     //     //padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),

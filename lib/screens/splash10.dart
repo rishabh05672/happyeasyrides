@@ -10,14 +10,17 @@ class Splash10Screen extends StatefulWidget {
 class _Splash10ScreenState extends State<Splash10Screen> {
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    final height = size.height;
+    final width = size.width;
     return Scaffold(
       backgroundColor: Color(0xff15CF92),
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: Color(0xff15CF92),
         flexibleSpace: Container(
-          width: double.infinity,
-          height: 114,
+          width: width,
+          height: height * 0.11,
 
           // App bar Image
           decoration: BoxDecoration(

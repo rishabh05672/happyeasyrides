@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:happyeasyrides/common/custom_bottom_navigation.dart';
 import 'package:happyeasyrides/provider/coupons_provider.dart';
 import 'package:happyeasyrides/screens/notification_screen.dart';
 import 'package:provider/provider.dart';
@@ -13,7 +14,7 @@ class Coupons extends StatefulWidget {
 class _CouponsState extends State<Coupons> {
   @override
   Widget build(BuildContext context) {
-    final offers = Provider.of<CouponsProvider>(context).offer;
+    //final offers = Provider.of<CouponsProvider>(context).offer;
     Size size = MediaQuery.of(context).size;
     final height = size.height;
     final width = size.width;
@@ -47,7 +48,12 @@ class _CouponsState extends State<Coupons> {
                     children: [
                       GestureDetector(
                         onTap: () {
-                          Navigator.pop(context);
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => CustomBottomNavigation(),
+                            ),
+                          );
                         },
                         child: Image.asset(
                           "assets/img/Icon feather-arrow-right.png",
@@ -93,7 +99,7 @@ class _CouponsState extends State<Coupons> {
               child: Container(
                 padding: EdgeInsets.only(top: 16.13, right: 20, left: 20),
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: Color(0xffF8F8FB),
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(40),
                     topRight: Radius.circular(40),
@@ -101,18 +107,23 @@ class _CouponsState extends State<Coupons> {
                 ),
                 child: SingleChildScrollView(
                   scrollDirection: Axis.vertical,
-                  child: Consumer(
-                    builder: (context, CouponsProvider, child) {
+                  child: Consumer<CouponsProvider>(
+                    // ignore: avoid_types_as_parameter_names
+                    builder: (ctx, CouponsProvider, child) {
                       return Column(
                         children: [
-                          ...List.generate(offers.length, (index) {
+                          ...List.generate(CouponsProvider.offer.length, (
+                            index,
+                          ) {
                             return Container(
                               margin: EdgeInsets.only(top: 12.47),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(30),
                                 image: DecorationImage(
                                   image: AssetImage(
-                                    offers[index]['backgroundImage'] ?? "",
+                                    CouponsProvider
+                                            .offer[index]['backgroundImage'] ??
+                                        "",
                                   ),
                                   fit: BoxFit.fill,
                                 ),
@@ -134,7 +145,9 @@ class _CouponsState extends State<Coupons> {
                                               CrossAxisAlignment.start,
                                           children: [
                                             Text(
-                                              offers[index]['title'] ?? "",
+                                              CouponsProvider
+                                                      .offer[index]['title'] ??
+                                                  "",
                                               style: TextStyle(
                                                 fontFamily: "Poppins",
                                                 fontSize: 13,
@@ -143,7 +156,9 @@ class _CouponsState extends State<Coupons> {
                                               ),
                                             ),
                                             Text(
-                                              offers[index]['discount'] ?? "",
+                                              CouponsProvider
+                                                      .offer[index]['discount'] ??
+                                                  "",
                                               style: TextStyle(
                                                 fontFamily: "Poppins",
                                                 fontSize: 21,
@@ -152,7 +167,8 @@ class _CouponsState extends State<Coupons> {
                                               ),
                                             ),
                                             Text(
-                                              offers[index]['description'] ??
+                                              CouponsProvider
+                                                      .offer[index]['description'] ??
                                                   "",
                                               style: TextStyle(
                                                 fontFamily: "Poppins",
@@ -226,7 +242,9 @@ class _CouponsState extends State<Coupons> {
                                         decoration: BoxDecoration(
                                           image: DecorationImage(
                                             image: AssetImage(
-                                              offers[index]['image'] ?? "",
+                                              CouponsProvider
+                                                      .offer[index]['image'] ??
+                                                  "",
                                             ),
                                             fit: BoxFit.fill,
                                           ),
@@ -246,7 +264,9 @@ class _CouponsState extends State<Coupons> {
                                         decoration: BoxDecoration(
                                           image: DecorationImage(
                                             image: AssetImage(
-                                              offers[index]['carImage'] ?? "",
+                                              CouponsProvider
+                                                      .offer[index]['carImage'] ??
+                                                  "",
                                             ),
                                           ),
                                         ),

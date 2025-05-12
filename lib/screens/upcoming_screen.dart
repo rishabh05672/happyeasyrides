@@ -15,17 +15,18 @@ class _UpcomingScreenState extends State<UpcomingScreen> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     final width = size.width;
+    final height = size.height;
 
     return SingleChildScrollView(
-      child: Column(
-        children: [
-          Consumer<UpcomingProvider>(
-            builder: (context, upcomingProvider, child) {
-              final upcomingArr = upcomingProvider.arrUpcoming;
+      child: Consumer<UpcomingProvider>(
+        builder: (context, upcomingProvider, child) {
+          final upcomingArr = upcomingProvider.arrUpcoming;
 
-              return Column(
-                children: List.generate(upcomingArr.length, (index) {
-                  return Container(
+          return Column(
+            children: List.generate(upcomingArr.length, (index) {
+              return Stack(
+                children: [
+                  Container(
                     margin: EdgeInsets.only(top: 10, right: 20, left: 20),
                     width: width,
                     decoration: BoxDecoration(
@@ -50,8 +51,8 @@ class _UpcomingScreenState extends State<UpcomingScreen> {
                             ),
                             child: Image.asset(
                               upcomingArr[index]["image"] ?? "",
-                              width: 89,
-                              height: 52,
+                              width: width * 0.20,
+                              height: height * 0.054,
                             ),
                           ),
                           SizedBox(width: 8),
@@ -95,6 +96,7 @@ class _UpcomingScreenState extends State<UpcomingScreen> {
                                         ),
                                       ),
                                     ),
+                                    SizedBox(width: 2),
                                     Text(
                                       upcomingArr[index]["gear"] ?? "",
                                       style: TextStyle(
@@ -115,6 +117,7 @@ class _UpcomingScreenState extends State<UpcomingScreen> {
                                         ),
                                       ),
                                     ),
+                                    SizedBox(width: 2),
                                     Text(
                                       upcomingArr[index]["fuel"] ?? "",
                                       style: TextStyle(
@@ -135,6 +138,7 @@ class _UpcomingScreenState extends State<UpcomingScreen> {
                                         ),
                                       ),
                                     ),
+                                    SizedBox(width: 2),
                                     Text(
                                       upcomingArr[index]["seat"] ?? "",
                                       style: TextStyle(
@@ -184,14 +188,34 @@ class _UpcomingScreenState extends State<UpcomingScreen> {
                         ],
                       ),
                     ),
-                  );
-                }),
+                  ),
+                  Positioned(
+                    top: 15,
+                    right: 24,
+                    child: Container(
+                      width: width * 0.07,
+                      height: height * 0.03,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Color(0xffe2e5ee),
+                      ),
+                      child: Center(
+                        child: Image.asset(
+                          "assets/img/arrow_booking_icon.png",
+                          height: 12.01,
+                          width: 12.01,
+                          fit: BoxFit.fill,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               );
-            },
-          ),
-          SizedBox(height: 10),
-        ],
+            }),
+          );
+        },
       ),
+      //SizedBox(height: 10),
     );
   }
 

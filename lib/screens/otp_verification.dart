@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:happyeasyrides/provider/login_provider.dart';
-
 import 'package:happyeasyrides/screens/login_success.dart';
-
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:provider/provider.dart';
 
@@ -138,6 +136,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 27),
             child: PinCodeTextField(
+              backgroundColor: Colors.transparent,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               keyboardType: TextInputType.number,
               length: 4,
@@ -145,12 +144,12 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
               blinkWhenObscuring: true,
               cursorColor: Color(0xffCCD7E8),
               textStyle: TextStyle(
-                color: Color(0xffCCD7E8),
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
+                color: Color(0xffB8B9C9),
+                fontSize: 26,
+                fontWeight: FontWeight.w700,
               ),
               pastedTextStyle: TextStyle(
-                color: Color(0xffCCD7E8),
+                color: Color(0xffB8B9C9),
                 fontWeight: FontWeight.bold,
               ),
               pinTheme: PinTheme(
@@ -158,13 +157,15 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                 borderRadius: BorderRadius.circular(50),
                 fieldHeight: MediaQuery.of(context).size.height * 0.06,
                 fieldWidth: MediaQuery.of(context).size.width * 0.19,
-                activeFillColor: Color(0xffCCD7E8),
-                inactiveFillColor: Color(0xffffffff),
-                selectedFillColor: Color(0xffffffff),
+                activeFillColor: Colors.white,
+                inactiveFillColor: Colors.white,
+                selectedFillColor: Colors.white,
                 activeColor: Color(0xffCCD7E8),
                 inactiveColor: Color(0xffCCD7E8),
                 selectedColor: Color(0xffCCD7E8),
+                fieldOuterPadding: EdgeInsets.zero,
               ),
+              enableActiveFill: true,
             ),
           ),
 
@@ -208,9 +209,10 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
             ),
             child: ElevatedButton(
               onPressed: () {
-                Navigator.push(
+                Navigator.pushAndRemoveUntil(
                   context,
                   MaterialPageRoute(builder: (context) => LoginSuccessScreen()),
+                  (route) => false,
                 );
               },
               style: ElevatedButton.styleFrom(
