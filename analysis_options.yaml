@@ -11,6 +11,7 @@ analyzer:
   errors:
     deprecated_member_use: ignore
     non_constant_identifier_names: ignore
+    sized_box_for_whitespace: ignore
 include: package:flutter_lints/flutter.yaml
 
 linter:

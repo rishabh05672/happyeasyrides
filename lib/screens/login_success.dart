@@ -83,7 +83,7 @@ class LoginSuccessScreen extends StatelessWidget {
                               textAlign: TextAlign.center,
                               "Choose Your Location To Start Find\nThe Request Around You",
                               style: TextStyle(
-                                fontSize: 16,
+                                fontSize: 15,
                                 fontWeight: FontWeight.w400,
                                 fontFamily: "Poppins",
                                 color: Color(0xff535353),

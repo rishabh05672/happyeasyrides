@@ -174,26 +174,29 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                RichText(
-                  text: TextSpan(
-                    text: "Didn't Receive OTP?",
-                    style: TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.w400,
-                      fontFamily: "Poppins",
-                      color: Color(0xff303030),
-                    ),
-                    children: [
-                      TextSpan(
-                        text: " Resend",
-                        style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w600,
-                          fontFamily: "Poppins",
-                          color: Color(0xff16CE92),
-                        ),
+                GestureDetector(
+                  onTap: () {},
+                  child: RichText(
+                    text: TextSpan(
+                      text: "Didn't Receive OTP?",
+                      style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.w400,
+                        fontFamily: "Poppins",
+                        color: Color(0xff303030),
                       ),
-                    ],
+                      children: [
+                        TextSpan(
+                          text: " Resend",
+                          style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.w600,
+                            fontFamily: "Poppins",
+                            color: Color(0xff16CE92),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ],

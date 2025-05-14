@@ -7,6 +7,7 @@ class LoginProvider with ChangeNotifier {
 
   set phoneNumber(String newphoneNumber) {
     _phoneNumber = newphoneNumber;
+
     notifyListeners();
   }
 }

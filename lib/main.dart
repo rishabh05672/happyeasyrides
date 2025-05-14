@@ -3,6 +3,7 @@ import 'package:happyeasyrides/provider/coupons_provider.dart';
 import 'package:happyeasyrides/provider/home_page_provider.dart';
 import 'package:happyeasyrides/provider/login_provider.dart';
 import 'package:happyeasyrides/provider/notification_provider.dart';
+import 'package:happyeasyrides/provider/select_city.dart';
 import 'package:happyeasyrides/provider/upcoming_provider.dart';
 import 'package:happyeasyrides/screens/splash.dart';
 import 'package:provider/provider.dart';
@@ -16,6 +17,7 @@ void main() {
         ChangeNotifierProvider(create: (context) => UpcomingProvider()),
         ChangeNotifierProvider(create: (context) => LoginProvider()),
         ChangeNotifierProvider(create: (context) => CouponsProvider()),
+        ChangeNotifierProvider(create: (context) => SelectCityProvider()),
       ],
       child: const MyApp(),
     ),
@@ -41,6 +43,7 @@ class MyApp extends StatelessWidget {
       //UpcomingScreen(),
       //MyBookingScreen(),
       //HomePage(),
+      //SelectCity(),
     );
   }
 }

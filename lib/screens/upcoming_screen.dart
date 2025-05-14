@@ -81,8 +81,7 @@ class _UpcomingScreenState extends State<UpcomingScreen> {
                                   ],
                                 ),
                                 Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceAround,
+                                  mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
                                     Container(
                                       width: 14,
@@ -96,7 +95,7 @@ class _UpcomingScreenState extends State<UpcomingScreen> {
                                         ),
                                       ),
                                     ),
-                                    SizedBox(width: 2),
+                                    SizedBox(width: 2.83),
                                     Text(
                                       upcomingArr[index]["gear"] ?? "",
                                       style: TextStyle(
@@ -104,7 +103,7 @@ class _UpcomingScreenState extends State<UpcomingScreen> {
                                         fontSize: 12,
                                       ),
                                     ),
-                                    SizedBox(width: 2),
+                                    SizedBox(width: 7.85),
                                     Container(
                                       width: 14,
                                       height: 14,
@@ -117,7 +116,7 @@ class _UpcomingScreenState extends State<UpcomingScreen> {
                                         ),
                                       ),
                                     ),
-                                    SizedBox(width: 2),
+                                    SizedBox(width: 2.83),
                                     Text(
                                       upcomingArr[index]["fuel"] ?? "",
                                       style: TextStyle(
@@ -125,7 +124,7 @@ class _UpcomingScreenState extends State<UpcomingScreen> {
                                         fontSize: 12,
                                       ),
                                     ),
-                                    SizedBox(width: 2),
+                                    SizedBox(width: 7.85),
                                     Container(
                                       width: 14,
                                       height: 14,
@@ -138,7 +137,7 @@ class _UpcomingScreenState extends State<UpcomingScreen> {
                                         ),
                                       ),
                                     ),
-                                    SizedBox(width: 2),
+                                    SizedBox(width: 2.83),
                                     Text(
                                       upcomingArr[index]["seat"] ?? "",
                                       style: TextStyle(

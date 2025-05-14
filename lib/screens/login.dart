@@ -103,7 +103,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ],
             ),
-            child: TextField(
+            child: TextFormField(
+              onTapOutside: (_) => FocusScope.of(context).unfocus(),
               controller: phoneController,
               keyboardType: TextInputType.phone,
               maxLength: 10,
