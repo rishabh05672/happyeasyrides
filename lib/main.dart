@@ -3,6 +3,7 @@ import 'package:happyeasyrides/provider/coupons_provider.dart';
 import 'package:happyeasyrides/provider/home_page_provider.dart';
 import 'package:happyeasyrides/provider/login_provider.dart';
 import 'package:happyeasyrides/provider/notification_provider.dart';
+import 'package:happyeasyrides/provider/profile_provider.dart';
 import 'package:happyeasyrides/provider/select_city.dart';
 import 'package:happyeasyrides/provider/upcoming_provider.dart';
 import 'package:happyeasyrides/screens/splash.dart';
@@ -18,6 +19,7 @@ void main() {
         ChangeNotifierProvider(create: (context) => LoginProvider()),
         ChangeNotifierProvider(create: (context) => CouponsProvider()),
         ChangeNotifierProvider(create: (context) => SelectCityProvider()),
+        ChangeNotifierProvider(create: (context) => ProfileProvider()),
       ],
       child: const MyApp(),
     ),

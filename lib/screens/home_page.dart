@@ -17,65 +17,9 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int whyHappyEasy = -1;
-  // DateTime? selectStartDate;
-  // DateTime? selectEndDate;
-  // TimeOfDay? selectStartTime;
-  // TimeOfDay? selectEndTime;
   bool isCitySelected = false;
   int currentOfferIndex = 0;
-
-  // Future<void> _selectedStartDate(BuildContext context) async {
-  //   final DateTime? startpicked = await showDatePicker(
-  //     context: context,
-  //     initialDate: DateTime.now(),
-  //     firstDate: DateTime.now(),
-  //     lastDate: DateTime.now().add(Duration(days: 365)),
-  //   );
-
-  //   if (startpicked != null) {
-  //     setState(() {
-  //       selectStartDate = startpicked;
-  //     });
-  //   }
-  // }
-
-  // Future<void> _selectedEndDate(BuildContext context) async {
-  //   final DateTime? endpicked = await showDatePicker(
-  //     context: context,
-  //     initialDate: DateTime.now(),
-  //     firstDate: DateTime.now(),
-  //     lastDate: DateTime.now().add(Duration(days: 365)),
-  //   );
-
-  //   if (endpicked != null) {
-  //     setState(() {
-  //       selectEndDate = endpicked;
-  //     });
-  //   }
-  // }
-
-  // Future<void> _selectedStartTime(BuildContext context) async {
-  //   final TimeOfDay? startTime = await showTimePicker(
-  //     context: context,
-  //     initialTime: TimeOfDay.now(),
-  //   );
-  //   if (startTime != null) {
-  //     setState(() {
-  //       selectStartTime = startTime;
-  //     });
-  //   }
-  // }
-
-  // Future<void> _selectedEndTime(BuildContext context) async {
-  //   final TimeOfDay? endTime = await showTimePicker(
-  //     context: context,
-  //     initialTime: TimeOfDay.now(),
-  //   );
-
-  //   if (endTime != null) {
-  //     selectEndTime = endTime;
-  //   }
-  // }
+  final ScrollController scrollController = ScrollController();
 
   @override
   Widget build(BuildContext context) {
@@ -95,6 +39,7 @@ class _HomePageState extends State<HomePage> {
         children: [
           Container(
             decoration: BoxDecoration(
+              color: Colors.white,
               gradient: LinearGradient(
                 colors: [Color(0xff15CF92), Color(0xff047EAA)],
               ),
@@ -623,6 +568,7 @@ class _HomePageState extends State<HomePage> {
                             ),
                           ],
                         ),
+                        //============================ Elevated Button Container ================================
                         Positioned(
                           top: size.height * 0.18,
                           right: 20,
@@ -715,191 +661,45 @@ class _HomePageState extends State<HomePage> {
                                 ),
                                 if (provider.isCitySelected)
                                   //=====================start date=========================
-                                  Padding(
-                                    padding: EdgeInsets.only(
-                                      top: 10,
-                                      right: 20,
-                                      left: 20,
-                                      bottom: 10,
-                                    ),
-                                    child: GestureDetector(
-                                      onTap:
-                                          () => provider.selectedStartDate(
-                                            context,
-                                          ),
-                                      child: Container(
-                                        width: size.width * 0.8,
-                                        height: size.height * 0.06,
-                                        decoration: BoxDecoration(
-                                          border: Border.all(
-                                            color: Color(0xffe7ebf5),
-                                          ),
-                                          boxShadow: [
-                                            BoxShadow(
-                                              color: Color(0xffe7ebf5),
-                                              offset: Offset(0, 1),
-                                              spreadRadius: .5,
-                                            ),
-                                          ],
-                                          color: Colors.white,
-                                          borderRadius: BorderRadius.circular(
-                                            40,
-                                          ),
-                                        ),
-                                        child: Center(
-                                          child: Text(
-                                            provider.selectStartDate != null
-                                                ? "${provider.selectStartDate!.day}/${provider.selectStartDate!.month}/${provider.selectStartDate!.year}"
-                                                : "Select Start Date",
-                                            style: TextStyle(
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.w500,
-                                              color: Color(0xff6E7FAA),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
+                                  CustomDateTimePicker(
+                                    onTap:
+                                        () =>
+                                            provider.selectedStartDate(context),
+                                    label:
+                                        provider.selectStartDate != null
+                                            ? "${provider.selectStartDate!.day}/${provider.selectStartDate!.month}/${provider.selectStartDate!.year}"
+                                            : "Select Start Date",
                                   ),
                                 //=========================Start Time======================
                                 if (provider.selectStartDate != null)
-                                  Padding(
-                                    padding: EdgeInsets.only(
-                                      right: 10,
-                                      left: 10,
-                                      bottom: 10,
-                                    ),
-                                    child: GestureDetector(
-                                      onTap:
-                                          () => provider.selectedStartTime(
-                                            context,
-                                          ),
-                                      child: Container(
-                                        width: size.width * 0.8,
-                                        height: size.height * 0.06,
-                                        decoration: BoxDecoration(
-                                          border: Border.all(
-                                            color: Color(0xffe7ebf5),
-                                          ),
-                                          boxShadow: [
-                                            BoxShadow(
-                                              color: Color(0xffe7ebf5),
-                                              offset: Offset(0, 1),
-                                              spreadRadius: .5,
-                                            ),
-                                          ],
-                                          color: Colors.white,
-                                          borderRadius: BorderRadius.circular(
-                                            40,
-                                          ),
-                                        ),
-                                        child: Center(
-                                          child: Text(
-                                            provider.selectStartTime != null
-                                                ? "${provider.selectStartTime!.hour}:${provider.selectStartTime!.minute.toString()}"
-                                                : "Select Start Time",
-                                            style: TextStyle(
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.w500,
-                                              color: Color(0xff6E7FAA),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
+                                  CustomDateTimePicker(
+                                    onTap:
+                                        () =>
+                                            provider.selectedStartTime(context),
+                                    label:
+                                        provider.selectStartTime != null
+                                            ? "${provider.selectStartTime!.hour}:${provider.selectStartTime!.minute}"
+                                            : "Select Start Time",
                                   ),
                                 //=====================end date=========================
                                 if (provider.selectStartTime != null)
-                                  Padding(
-                                    padding: EdgeInsets.only(
-                                      //top: 10,
-                                      right: 20,
-                                      left: 20,
-                                      bottom: 10,
-                                    ),
-                                    child: GestureDetector(
-                                      onTap:
-                                          () =>
-                                              provider.selectedEndDate(context),
-                                      child: Container(
-                                        width: size.width * 0.8,
-                                        height: size.height * 0.06,
-                                        decoration: BoxDecoration(
-                                          border: Border.all(
-                                            color: Color(0xffe7ebf5),
-                                          ),
-                                          boxShadow: [
-                                            BoxShadow(
-                                              color: Color(0xffe7ebf5),
-                                              offset: Offset(0, 1),
-                                              spreadRadius: .5,
-                                            ),
-                                          ],
-                                          color: Colors.white,
-                                          borderRadius: BorderRadius.circular(
-                                            40,
-                                          ),
-                                        ),
-                                        child: Center(
-                                          child: Text(
-                                            provider.selectEndDate != null
-                                                ? "${provider.selectEndDate!.day}/${provider.selectEndDate!.month}/${provider.selectEndDate!.year}"
-                                                : "Select End Time",
-                                            style: TextStyle(
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.w500,
-                                              color: Color(0xff6E7FAA),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
+                                  CustomDateTimePicker(
+                                    onTap:
+                                        () => provider.selectedEndDate(context),
+                                    label:
+                                        provider.selectEndDate != null
+                                            ? "${provider.selectEndDate!.day}/${provider.selectEndDate!.month}/${provider.selectEndDate!.year}"
+                                            : "Select End Date",
                                   ),
                                 //===================End Time====================
                                 if (provider.selectEndDate != null)
-                                  Padding(
-                                    padding: EdgeInsets.only(
-                                      right: 10,
-                                      left: 10,
-                                      bottom: 10,
-                                    ),
-                                    child: GestureDetector(
-                                      onTap:
-                                          () =>
-                                              provider.selectedEndTime(context),
-                                      child: Container(
-                                        width: size.width * 0.8,
-                                        height: size.height * 0.06,
-                                        decoration: BoxDecoration(
-                                          border: Border.all(
-                                            color: Color(0xffe7ebf5),
-                                          ),
-                                          boxShadow: [
-                                            BoxShadow(
-                                              color: Color(0xffe7ebf5),
-                                              offset: Offset(0, 1),
-                                              spreadRadius: .5,
-                                            ),
-                                          ],
-                                          color: Colors.white,
-                                          borderRadius: BorderRadius.circular(
-                                            40,
-                                          ),
-                                        ),
-                                        child: Center(
-                                          child: Text(
-                                            provider.selectEndTime != null
-                                                ? "${provider.selectEndTime!.hour}:${provider.selectEndTime!.minute.toString()}"
-                                                : "Select End Time",
-                                            style: TextStyle(
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.w500,
-                                              color: Color(0xff6E7FAA),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
+                                  CustomDateTimePicker(
+                                    onTap:
+                                        () => provider.selectedEndTime(context),
+                                    label:
+                                        provider.selectEndTime != null
+                                            ? "${provider.selectEndTime!.hour}:${provider.selectEndTime!.minute}"
+                                            : "Select End Time",
                                   ),
 
                                 //==================Elevated Button=========================
@@ -1042,6 +842,46 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+
+  Widget CustomDateTimePicker({
+    required VoidCallback onTap,
+    required String label,
+    bool isEnabled = true,
+  }) {
+    final size = MediaQuery.of(context).size;
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+      child: GestureDetector(
+        onTap: isEnabled ? onTap : null,
+        child: Container(
+          width: size.width * 0.8,
+          height: size.height * 0.06,
+          decoration: BoxDecoration(
+            border: Border.all(color: const Color(0xffe7ebf5)),
+            boxShadow: [
+              const BoxShadow(
+                color: Color(0xffe7ebf5),
+                offset: Offset(0, 1),
+                spreadRadius: 0.5,
+              ),
+            ],
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(40),
+          ),
+          child: Center(
+            child: Text(
+              label,
+              style: const TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
+                color: Color(0xff6E7FAA),
+              ),
+            ),
+          ),
         ),
       ),
     );

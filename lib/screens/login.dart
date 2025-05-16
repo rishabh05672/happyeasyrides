@@ -198,6 +198,7 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             child: ElevatedButton(
               onPressed: () {
+                //if (phoneController.text.length != 10) return;
                 String phoneNumber = (phoneController.text);
                 Provider.of<LoginProvider>(context, listen: false).phoneNumber =
                     phoneNumber;
@@ -229,7 +230,6 @@ class _LoginScreenState extends State<LoginScreen> {
               children: [
                 TextSpan(
                   text: "By creating an account, you agree to our\n",
-
                   style: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w400,

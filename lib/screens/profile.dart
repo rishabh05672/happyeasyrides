@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:happyeasyrides/common/custom_bottom_navigation.dart';
 import 'package:happyeasyrides/provider/login_provider.dart';
+import 'package:happyeasyrides/provider/profile_provider.dart';
 import 'package:provider/provider.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -106,41 +107,48 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ],
             ),
             SizedBox(height: 30),
-            Stack(
-              children: [
-                Container(
-                  width: width * 0.23,
-                  height: height * 0.106,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(100),
-                    border: Border.all(width: 4, color: Color(0xff094c57)),
-                  ),
-                  child: Image.asset(
-                    "assets/img/boy_avatar.png",
-                    fit: BoxFit.fill,
-                  ),
-                ),
-                Positioned(
-                  top: 0,
-                  right: 3,
-                  child: Container(
-                    width: 24,
-                    height: 24,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Color(0xffFFC234),
-                    ),
-                    child: Center(
+            Consumer<ProfileProvider>(
+              builder: (context, ProfileProvider, child) {
+                return Stack(
+                  children: [
+                    Container(
+                      width: width * 0.23,
+                      height: height * 0.106,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(100),
+                        border: Border.all(width: 4, color: Color(0xff094c57)),
+                      ),
                       child: Image.asset(
-                        "assets/img/profile_pic_edit.png",
-                        width: 14,
-                        height: 11.9,
+                        "assets/img/boy_avatar.png",
                         fit: BoxFit.fill,
                       ),
                     ),
-                  ),
-                ),
-              ],
+                    Positioned(
+                      top: 0,
+                      right: 3,
+                      child: GestureDetector(
+                        onTap: () {},
+                        child: Container(
+                          width: 24,
+                          height: 24,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Color(0xffFFC234),
+                          ),
+                          child: Center(
+                            child: Image.asset(
+                              "assets/img/profile_pic_edit.png",
+                              width: 14,
+                              height: 11.9,
+                              fit: BoxFit.fill,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                );
+              },
             ),
             SizedBox(height: 7),
             Text(
@@ -177,6 +185,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                   SizedBox(width: 4.94),
                   Text(
+                    // ignore: unnecessary_string_interpolations
                     "$phoneNumber",
                     style: TextStyle(
                       fontSize: 18,

@@ -55,7 +55,7 @@ class _UpcomingScreenState extends State<UpcomingScreen> {
                               height: height * 0.054,
                             ),
                           ),
-                          SizedBox(width: 8),
+                          SizedBox(width: 5),
                           Expanded(
                             child: Column(
                               children: [
@@ -70,7 +70,7 @@ class _UpcomingScreenState extends State<UpcomingScreen> {
                                       ),
                                       overflow: TextOverflow.ellipsis,
                                     ),
-                                    SizedBox(width: 8),
+                                    SizedBox(width: 5),
                                     Text(
                                       upcomingArr[index]["model"] ?? "",
                                       style: TextStyle(
@@ -193,7 +193,7 @@ class _UpcomingScreenState extends State<UpcomingScreen> {
                     right: 24,
                     child: Container(
                       width: width * 0.07,
-                      height: height * 0.03,
+                      height: height * 0.025,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         color: Color(0xffe2e5ee),
@@ -201,8 +201,8 @@ class _UpcomingScreenState extends State<UpcomingScreen> {
                       child: Center(
                         child: Image.asset(
                           "assets/img/arrow_booking_icon.png",
-                          height: 12.01,
-                          width: 12.01,
+                          height: 8.01,
+                          width: 8.01,
                           fit: BoxFit.fill,
                         ),
                       ),

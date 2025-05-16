@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import '../provider/select_city.dart';
 
 class HomePageProvider with ChangeNotifier {
+  // ignore: unused_field
   String _searchText = "";
   TextEditingController searchController = TextEditingController();
   bool isCitySelected = false;
@@ -12,7 +13,6 @@ class HomePageProvider with ChangeNotifier {
   void setSearchText(String text) {
     searchController.text = text;
     _searchText = text;
-
     notifyListeners();
   }
 
@@ -55,11 +55,6 @@ class HomePageProvider with ChangeNotifier {
   ];
   List<Map<String, String>> get arrTestimonial => _arrTestimonial;
 
-  DateTime? selectStartDate;
-  DateTime? selectEndDate;
-  TimeOfDay? selectStartTime;
-  TimeOfDay? selectEndTime;
-
   Future<void> showCitySelectionDialog(BuildContext context) async {
     final size = MediaQuery.of(context).size;
 
@@ -96,6 +91,22 @@ class HomePageProvider with ChangeNotifier {
         );
       },
     );
+  }
+
+  DateTime? selectStartDate;
+  DateTime? selectEndDate;
+  TimeOfDay? selectStartTime;
+  TimeOfDay? selectEndTime;
+
+  void searchResetFields() {
+    searchController.clear();
+    selectStartDate = null;
+    selectEndDate = null;
+    selectStartTime = null;
+    selectEndTime = null;
+    isCitySelected = false;
+    _searchText = "";
+    notifyListeners();
   }
 
   Future<void> selectedStartDate(BuildContext context) async {
