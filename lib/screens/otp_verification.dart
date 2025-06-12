@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:happyeasyrides/provider/login_provider.dart';
+import 'package:happyeasyrides/screens/login.dart';
 import 'package:happyeasyrides/screens/login_success.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:provider/provider.dart';
@@ -175,7 +176,12 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (context) => LoginScreen()),
+                    );
+                  },
                   child: RichText(
                     text: TextSpan(
                       text: "Didn't Receive OTP?",

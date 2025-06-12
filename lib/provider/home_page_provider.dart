@@ -122,7 +122,6 @@ class HomePageProvider with ChangeNotifier {
       notifyListeners();
     }
   }
-
   Future<void> selectedEndDate(BuildContext context) async {
     final DateTime? endpicked = await showDatePicker(
       context: context,
@@ -149,12 +148,20 @@ class HomePageProvider with ChangeNotifier {
   }
 
   Future<void> selectedEndTime(BuildContext context) async {
+    if (selectStartTime == null) return;
+
     final TimeOfDay? endTime = await showTimePicker(
       context: context,
-      initialTime: TimeOfDay.now(),
+      initialTime: selectStartTime!,
     );
 
     if (endTime != null) {
+      // Convert times to minutes for comparison
+      final startMinutes = selectStartTime!.hour * 60 + selectStartTime!.minute;
+      final endMinutes = endTime.hour * 60 + endTime.minute;
+
+      if (endMinutes <= startMinutes) return;
+
       selectEndTime = endTime;
       notifyListeners();
     }

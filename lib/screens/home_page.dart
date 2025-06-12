@@ -4,6 +4,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:happyeasyrides/provider/home_page_provider.dart';
 import 'package:happyeasyrides/provider/select_city.dart';
+import 'package:happyeasyrides/screens/available_car_screen.dart';
 import 'package:happyeasyrides/screens/coupons.dart';
 import 'package:happyeasyrides/screens/notification_screen.dart';
 import 'package:provider/provider.dart';
@@ -20,6 +21,14 @@ class _HomePageState extends State<HomePage> {
   bool isCitySelected = false;
   int currentOfferIndex = 0;
   final ScrollController scrollController = ScrollController();
+
+  _scrollListener() {}
+
+  @override
+  void initState() {
+    scrollController.addListener(_scrollListener);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -189,6 +198,7 @@ class _HomePageState extends State<HomePage> {
                 //---------------------MAIN COLUMN----------------------------------
                 Expanded(
                   child: SingleChildScrollView(
+                    controller: scrollController,
                     child: Stack(
                       children: [
                         Column(
@@ -667,7 +677,7 @@ class _HomePageState extends State<HomePage> {
                                             provider.selectedStartDate(context),
                                     label:
                                         provider.selectStartDate != null
-                                            ? "${provider.selectStartDate!.day}/${provider.selectStartDate!.month}/${provider.selectStartDate!.year}"
+                                            ? "Start Date: ${provider.selectStartDate!.day}/${provider.selectStartDate!.month}/${provider.selectStartDate!.year}"
                                             : "Select Start Date",
                                   ),
                                 //=========================Start Time======================
@@ -678,7 +688,7 @@ class _HomePageState extends State<HomePage> {
                                             provider.selectedStartTime(context),
                                     label:
                                         provider.selectStartTime != null
-                                            ? "${provider.selectStartTime!.hour}:${provider.selectStartTime!.minute}"
+                                            ? "Start Time: ${provider.selectStartTime!.hour}:${provider.selectStartTime!.minute}"
                                             : "Select Start Time",
                                   ),
                                 //=====================end date=========================
@@ -688,7 +698,7 @@ class _HomePageState extends State<HomePage> {
                                         () => provider.selectedEndDate(context),
                                     label:
                                         provider.selectEndDate != null
-                                            ? "${provider.selectEndDate!.day}/${provider.selectEndDate!.month}/${provider.selectEndDate!.year}"
+                                            ? "End Date: ${provider.selectEndDate!.day}/${provider.selectEndDate!.month}/${provider.selectEndDate!.year}"
                                             : "Select End Date",
                                   ),
                                 //===================End Time====================
@@ -698,7 +708,7 @@ class _HomePageState extends State<HomePage> {
                                         () => provider.selectedEndTime(context),
                                     label:
                                         provider.selectEndTime != null
-                                            ? "${provider.selectEndTime!.hour}:${provider.selectEndTime!.minute}"
+                                            ? "End Time: ${provider.selectEndTime!.hour}:${provider.selectEndTime!.minute}"
                                             : "Select End Time",
                                   ),
 
@@ -719,7 +729,9 @@ class _HomePageState extends State<HomePage> {
                                           Navigator.push(
                                             context,
                                             MaterialPageRoute(
-                                              builder: (context) => Coupons(),
+                                              builder:
+                                                  (context) =>
+                                                      AvailableCarScreen(),
                                             ),
                                           );
                                         } else {
@@ -858,6 +870,7 @@ class _HomePageState extends State<HomePage> {
       child: GestureDetector(
         onTap: isEnabled ? onTap : null,
         child: Container(
+          padding: EdgeInsets.only(left: 15),
           width: size.width * 0.8,
           height: size.height * 0.06,
           decoration: BoxDecoration(
@@ -872,15 +885,20 @@ class _HomePageState extends State<HomePage> {
             color: Colors.white,
             borderRadius: BorderRadius.circular(40),
           ),
-          child: Center(
-            child: Text(
-              label,
-              style: const TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w500,
-                color: Color(0xff6E7FAA),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                textAlign: TextAlign.left,
+                label,
+                style: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                  color: Color(0xff6E7FAA),
+                ),
               ),
-            ),
+            ],
           ),
         ),
       ),

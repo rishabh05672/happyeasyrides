@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_types_as_parameter_names
+
 import 'package:flutter/material.dart';
 import 'package:happyeasyrides/common/custom_bottom_navigation.dart';
 import 'package:happyeasyrides/provider/login_provider.dart';
@@ -118,16 +120,30 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         borderRadius: BorderRadius.circular(100),
                         border: Border.all(width: 4, color: Color(0xff094c57)),
                       ),
-                      child: Image.asset(
-                        "assets/img/boy_avatar.png",
-                        fit: BoxFit.fill,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(100),
+                        child:
+                            ProfileProvider.image != null
+                                ? Image.file(
+                                  ProfileProvider.image!,
+                                  fit: BoxFit.fill,
+                                  width: width * 0.23,
+                                  height: height * 0.106,
+                                )
+                                : Image.asset(
+                                  "assets/img/boy_avatar.png",
+                                  fit: BoxFit.fill,
+                                ),
                       ),
                     ),
                     Positioned(
                       top: 0,
                       right: 3,
                       child: GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          //pick image
+                          ProfileProvider.pickImage();
+                        },
                         child: Container(
                           width: 24,
                           height: 24,
@@ -215,96 +231,101 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   child: Column(
                     children: [
                       SizedBox(height: 34),
-                      Column(
-                        children: List.generate(arrProfile.length, (index) {
-                          return GestureDetector(
-                            onTap: () {
-                              selectedIndex = index;
-                              setState(() {});
-                            },
-                            child: Container(
-                              width: width,
-                              margin: EdgeInsets.only(
-                                top: 10,
-                                left: 20,
-                                right: 20,
-                              ),
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(20),
-                                border: Border.all(
-                                  width: 1,
-                                  color:
-                                      selectedIndex == index
-                                          ? Color(0xff16CE92)
-                                          : Colors.white,
-                                ),
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.only(
-                                  top: 10,
-                                  bottom: 10,
-                                  left: 13,
-                                  right: 26,
-                                ),
-                                child: Row(
-                                  children: [
-                                    Container(
-                                      width: width * 0.12,
-                                      height: 48,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(10),
-                                        color:
-                                            selectedIndex == index
-                                                ? Color(0xff16ce92)
-                                                : Color(0xffdbfff3),
-                                      ),
-                                      child: Center(
-                                        child: Container(
-                                          width: 32,
-                                          height: 32,
+                      Consumer<ProfileProvider>(
+                        builder: (context, value, child) {
+                          return Column(
+                            children: List.generate(arrProfile.length, (index) {
+                              return GestureDetector(
+                                onTap: () {
+                                  selectedIndex = index;
+                                  setState(() {});
+                                },
+                                child: Container(
+                                  width: width,
+                                  margin: EdgeInsets.only(
+                                    top: 10,
+                                    left: 20,
+                                    right: 20,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(20),
+                                    border: Border.all(
+                                      width: 1,
+                                      color:
+                                          selectedIndex == index
+                                              ? Color(0xff16CE92)
+                                              : Colors.white,
+                                    ),
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(
+                                      top: 10,
+                                      bottom: 10,
+                                      left: 13,
+                                      right: 26,
+                                    ),
+                                    child: Row(
+                                      children: [
+                                        Container(
+                                          width: width * 0.12,
+                                          height: 48,
                                           decoration: BoxDecoration(
-                                            color: Color(0xff16CE92),
                                             borderRadius: BorderRadius.circular(
-                                              100,
+                                              10,
                                             ),
+                                            color:
+                                                selectedIndex == index
+                                                    ? Color(0xff16ce92)
+                                                    : Color(0xffdbfff3),
                                           ),
                                           child: Center(
-                                            child: Image.asset(
-                                              arrProfile[index]["image"],
-                                              width: 18,
-                                              height: 18,
-                                              fit: BoxFit.contain,
+                                            child: Container(
+                                              width: 32,
+                                              height: 32,
+                                              decoration: BoxDecoration(
+                                                color: Color(0xff16CE92),
+                                                borderRadius:
+                                                    BorderRadius.circular(100),
+                                              ),
+                                              child: Center(
+                                                child: Image.asset(
+                                                  arrProfile[index]["image"],
+                                                  width: 18,
+                                                  height: 18,
+                                                  fit: BoxFit.contain,
+                                                ),
+                                              ),
                                             ),
                                           ),
                                         ),
-                                      ),
+                                        const SizedBox(width: 13),
+                                        Text(
+                                          arrProfile[index]["name"],
+                                          style: TextStyle(
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w500,
+                                            fontFamily: "Poppins",
+                                            color: Color(0xff100C08),
+                                          ),
+                                        ),
+                                        Spacer(),
+                                        Icon(
+                                          Icons.arrow_forward_ios,
+                                          size: 14,
+                                          color:
+                                              selectedIndex == index
+                                                  ? Color(0xff16ce92)
+                                                  : Color(0xffb4b7c1),
+                                        ),
+                                      ],
                                     ),
-                                    const SizedBox(width: 13),
-                                    Text(
-                                      arrProfile[index]["name"],
-                                      style: TextStyle(
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.w500,
-                                        fontFamily: "Poppins",
-                                        color: Color(0xff100C08),
-                                      ),
-                                    ),
-                                    Spacer(),
-                                    Icon(
-                                      Icons.arrow_forward_ios,
-                                      size: 14,
-                                      color:
-                                          selectedIndex == index
-                                              ? Color(0xff16ce92)
-                                              : Color(0xffb4b7c1),
-                                    ),
-                                  ],
+                                  ),
                                 ),
-                              ),
-                            ),
+                              );
+                            }),
                           );
-                        }),
+                        },
                       ),
                       // ListView.builder(
                       //   itemCount: arrProfile.length,

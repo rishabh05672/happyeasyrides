@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:happyeasyrides/provider/available_provider.dart';
 import 'package:happyeasyrides/provider/coupons_provider.dart';
 import 'package:happyeasyrides/provider/home_page_provider.dart';
 import 'package:happyeasyrides/provider/login_provider.dart';
@@ -20,6 +21,7 @@ void main() {
         ChangeNotifierProvider(create: (context) => CouponsProvider()),
         ChangeNotifierProvider(create: (context) => SelectCityProvider()),
         ChangeNotifierProvider(create: (context) => ProfileProvider()),
+        ChangeNotifierProvider(create: (context) => AvailableProvider()),
       ],
       child: const MyApp(),
     ),

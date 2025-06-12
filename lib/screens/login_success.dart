@@ -1,8 +1,27 @@
-import 'package:flutter/material.dart';
-import 'package:happyeasyrides/common/custom_bottom_navigation.dart';
+import 'dart:async';
 
-class LoginSuccessScreen extends StatelessWidget {
+import 'package:flutter/material.dart';
+
+import 'package:happyeasyrides/widgets/location_permission_dialog.dart';
+
+class LoginSuccessScreen extends StatefulWidget {
   const LoginSuccessScreen({super.key});
+
+  @override
+  State<LoginSuccessScreen> createState() => _LoginSuccessScreenState();
+}
+
+class _LoginSuccessScreenState extends State<LoginSuccessScreen> {
+  @override
+  void initState() {
+    Timer(Duration(seconds: 3), () {
+      showDialog(
+        context: context,
+        builder: (context) => LocationPermissionDialog(),
+      );
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -20,8 +39,8 @@ class LoginSuccessScreen extends StatelessWidget {
           Image.asset(
             "assets/img/photo_loginsuccess.png",
             fit: BoxFit.cover,
-            width: 274.21,
-            height: 227.8,
+            width: screenWidth * 0.62,
+            height: screenHeight * 0.23,
           ),
           SizedBox(height: screenHeight * 0.04),
           Text(
@@ -55,113 +74,7 @@ class LoginSuccessScreen extends StatelessWidget {
               onPressed: () {
                 showDialog(
                   context: context,
-                  builder: (context) {
-                    // Alert dialog box
-                    return AlertDialog(
-                      content: Padding(
-                        padding: const EdgeInsets.only(top: 48.0),
-                        child: Image.asset(
-                          "assets/img/location_otpscreen.png",
-                          height: 109.5,
-                          width: 109.5,
-                        ),
-                      ),
-                      actions: <Widget>[
-                        Column(
-                          children: [
-                            Text(
-                              textAlign: TextAlign.center,
-                              "Enable Your Location",
-                              style: TextStyle(
-                                fontSize: 26,
-                                fontWeight: FontWeight.w600,
-                                fontFamily: "Poppins",
-                                color: Color(0xff100c08),
-                              ),
-                            ),
-                            Text(
-                              textAlign: TextAlign.center,
-                              "Choose Your Location To Start Find\nThe Request Around You",
-                              style: TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.w400,
-                                fontFamily: "Poppins",
-                                color: Color(0xff535353),
-                              ),
-                            ),
-
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                top: 24,
-                                bottom: 12,
-                                left: 27,
-                                right: 28,
-                              ),
-
-                              //Use My Location Button
-                              child: SizedBox(
-                                width: double.infinity,
-                                height: 54,
-                                child: ElevatedButton(
-                                  onPressed: () {},
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor: Color(0xff16CE92),
-                                  ),
-                                  child: Text(
-                                    "Use My Location",
-                                    style: TextStyle(
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.w500,
-                                      fontFamily: "Poppins",
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-
-                            //Skip for Now Button
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                bottom: 12,
-                                left: 27,
-                                right: 28,
-                              ),
-                              child: SizedBox(
-                                width: double.infinity,
-                                height: 54,
-                                child: ElevatedButton(
-                                  onPressed: () {
-                                    Navigator.pushAndRemoveUntil(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder:
-                                            (context) =>
-                                                CustomBottomNavigation(),
-                                      ),
-                                      (route) => false,
-                                    );
-                                  },
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor: Color(0xffF3F4FF),
-                                  ),
-                                  child: Text(
-                                    "Skip for Now",
-                                    style: TextStyle(
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.w500,
-                                      fontFamily: "Poppins",
-                                      color: Color(0xffB8B8B8),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    );
-                  },
+                  builder: (context) => const LocationPermissionDialog(),
                 );
               },
               style: ElevatedButton.styleFrom(

@@ -25,6 +25,12 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   @override
+  void dispose() {
+    phoneController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
@@ -121,12 +127,12 @@ class _LoginScreenState extends State<LoginScreen> {
                   borderSide: BorderSide(color: Colors.white, width: 1),
                 ),
                 counterText: "",
-                hintText: "",
+                hintText: "Enter your Mobile Number",
                 hintStyle: TextStyle(
-                  fontSize: 18,
+                  fontSize: 12,
                   fontWeight: FontWeight.w400,
                   fontFamily: "Poppins",
-                  color: Colors.white,
+                  color: Colors.grey,
                 ),
                 prefixIcon: Padding(
                   padding: EdgeInsets.only(top: 19, left: 26.4, bottom: 17.98),
@@ -179,7 +185,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           child: Image.asset(
                             isTick
                                 ? "assets/img/righttick_textfield.png"
-                                : "assets/img/close+icon.png",
+                                : "assets/img/red_cross.png",
                             fit: BoxFit.contain,
                             width: 24,
                             height: 24,
@@ -197,20 +203,25 @@ class _LoginScreenState extends State<LoginScreen> {
               right: screenWidth * 0.06,
             ),
             child: ElevatedButton(
-              onPressed: () {
-                //if (phoneController.text.length != 10) return;
-                String phoneNumber = (phoneController.text);
-                Provider.of<LoginProvider>(context, listen: false).phoneNumber =
-                    phoneNumber;
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => OtpVerificationScreen(),
-                  ),
-                );
-              },
+              onPressed:
+                  phoneController.text.length == 10
+                      ? () {
+                        String phoneNumber = phoneController.text;
+                        Provider.of<LoginProvider>(context, listen: false)
+                            .phoneNumber = phoneNumber;
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => OtpVerificationScreen(),
+                          ),
+                        );
+                      }
+                      : null,
               style: ElevatedButton.styleFrom(
-                backgroundColor: Color(0xff0077AC),
+                backgroundColor:
+                    phoneController.text.length == 10
+                        ? Color(0xff0077AC)
+                        : Colors.grey,
               ),
               child: Text(
                 "Confirm Now",
