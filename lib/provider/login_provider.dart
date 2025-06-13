@@ -10,4 +10,14 @@ class LoginProvider with ChangeNotifier {
 
     notifyListeners();
   }
+
+  String _otpNumber = "";
+
+  String get otpNumber => _otpNumber;
+
+  set otpNumber(String newOtpNumber) {
+    _otpNumber = newOtpNumber;
+
+    notifyListeners();
+  }
 }

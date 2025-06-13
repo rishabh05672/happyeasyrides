@@ -344,20 +344,51 @@ class _AvailableCarScreenState extends State<AvailableCarScreen> {
                     ),
                     SizedBox(height: 8),
                     Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          "Pickup Location: ",
-                          style: TextStyle(color: Colors.grey),
+                        Image.asset(
+                          "assets/img/sixth_splash11.png",
+                          width: 15,
+                          height: 15,
                         ),
+                        SizedBox(width: 3),
                         Expanded(
-                          child: Text(
-                            location,
-                            style: TextStyle(
-                              fontSize: 10,
-                              fontWeight: FontWeight.w600,
+                          child: RichText(
+                            text: TextSpan(
+                              children: [
+                                TextSpan(
+                                  text: "Pickup Location:",
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                TextSpan(
+                                  text: " $location",
+                                  style: TextStyle(
+                                    color: Colors.grey,
+                                    fontSize: 13,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
+                          // Text(
+                          //   "Pickup Location: $location",
+                          //   style: TextStyle(color: Colors.grey),
+                          // ),
                         ),
+                        // Expanded(
+                        //   child: Text(
+                        //     ,
+                        //     style: TextStyle(
+                        //       fontSize: 10,
+                        //       fontWeight: FontWeight.w600,
+                        //     ),
+                        //   ),
+                        // ),
                       ],
                     ),
                   ],
@@ -391,7 +422,7 @@ class _AvailableCarScreenState extends State<AvailableCarScreen> {
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         decoration: BoxDecoration(
-          color: Colors.blue,
+          color: Color(0xff0077AC),
           borderRadius: BorderRadius.circular(8),
         ),
         child: Text(

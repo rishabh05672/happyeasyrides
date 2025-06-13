@@ -13,7 +13,14 @@ class OtpVerificationScreen extends StatefulWidget {
 }
 
 class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
+  TextEditingController otpController = TextEditingController();
   String? phoneNumber;
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     phoneNumber = Provider.of<LoginProvider>(context).phoneNumber;
@@ -137,6 +144,10 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 27),
             child: PinCodeTextField(
+              controller: otpController,
+              onChanged: (value) {
+                setState(() {});
+              },
               backgroundColor: Colors.transparent,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               keyboardType: TextInputType.number,
@@ -218,14 +229,23 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
             ),
             child: ElevatedButton(
               onPressed: () {
-                Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(builder: (context) => LoginSuccessScreen()),
-                  (route) => false,
-                );
+                if (otpController.text.length == 4) {
+                  String otpNumber = otpController.text;
+                  Provider.of<LoginProvider>(context, listen: false).otpNumber =
+                      otpNumber;
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const LoginSuccessScreen(),
+                    ),
+                  );
+                }
               },
               style: ElevatedButton.styleFrom(
-                backgroundColor: Color(0xff0077AC),
+                backgroundColor:
+                    otpController.text.length == 4
+                        ? const Color(0xff0077AC)
+                        : Colors.grey,
               ),
               child: Text(
                 "Verify Now",
