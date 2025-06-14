@@ -182,14 +182,29 @@ class _LoginScreenState extends State<LoginScreen> {
                             top: 20,
                             bottom: 20,
                           ),
-                          child: Image.asset(
-                            isTick
-                                ? "assets/img/righttick_textfield.png"
-                                : "assets/img/red_cross.png",
-                            fit: BoxFit.contain,
-                            width: 24,
-                            height: 24,
-                          ),
+                          child:
+                              isTick
+                                  ? Image.asset(
+                                    "assets/img/righttick_textfield.png",
+                                    fit: BoxFit.contain,
+                                    width: 24,
+                                    height: 24,
+                                  )
+                                  : GestureDetector(
+                                    onTap: () {
+                                      phoneController.text = phoneController
+                                          .text
+                                          .substring(
+                                            0,
+                                            phoneController.text.length - 1,
+                                          );
+                                    },
+                                    child: Image.asset(
+                                      "assets/img/red_cross.png",
+                                      width: 24,
+                                      height: 24,
+                                    ),
+                                  ),
                         ),
               ),
             ),

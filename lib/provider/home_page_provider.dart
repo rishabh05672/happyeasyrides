@@ -3,19 +3,18 @@ import 'package:provider/provider.dart';
 import '../provider/select_city.dart';
 
 class HomePageProvider with ChangeNotifier {
-  // ignore: unused_field
+  // Search and city selection
   String _searchText = "";
   TextEditingController searchController = TextEditingController();
   bool isCitySelected = false;
 
-  String get searchText => searchController.text;
+  // Date and time selection state
+  DateTime? selectStartDate;
+  DateTime? selectEndDate;
+  TimeOfDay? selectStartTime;
+  TimeOfDay? selectEndTime;
 
-  void setSearchText(String text) {
-    searchController.text = text;
-    _searchText = text;
-    notifyListeners();
-  }
-
+  // Static content data
   final List<Map<String, String>> _arrWhyhappyeasy = [
     {"image": "assets/img/pic_247.png", "title": "24 x 7 Customer\n Support"},
     {
@@ -26,78 +25,64 @@ class HomePageProvider with ChangeNotifier {
     {"image": "assets/img/car_whyHome.png", "title": "Easy Booking Experience"},
   ];
 
-  List<Map<String, String>> get arrWhyhappyeasy => _arrWhyhappyeasy;
-
   final List<Map<String, String>> _arrOffer = [
     {"image": "assets/img/offers_home.png"},
     {"image": "assets/img/offers_home.png"},
     {"image": "assets/img/offers_home.png"},
   ];
 
-  List<Map<String, String>> get arrOffer => _arrOffer;
-
   final List<Map<String, String>> _arrTestimonial = [
     {
       "name": "Himani Sing",
-      "testimonial":
-          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the when an unknown printer took galley of type and scrambled to make specimen book.",
+      "testimonial": "Lorem Ipsum is simply dummy text...",
     },
-    {
-      "name": "Himani Sing",
-      "testimonial":
-          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the when an unknown printer took galley of type and scrambled to make specimen book.",
-    },
-    {
-      "name": "Himani Sing",
-      "testimonial":
-          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the when an unknown printer took galley of type and scrambled to make specimen book.",
-    },
+    // ... other testimonials
   ];
+
+  // Getters
+  String get searchText => searchController.text;
+  List<Map<String, String>> get arrWhyhappyeasy => _arrWhyhappyeasy;
+  List<Map<String, String>> get arrOffer => _arrOffer;
   List<Map<String, String>> get arrTestimonial => _arrTestimonial;
 
+  // City selection dialog
   Future<void> showCitySelectionDialog(BuildContext context) async {
-    final size = MediaQuery.of(context).size;
+    final selectCityProvider = Provider.of<SelectCityProvider>(
+      context,
+      listen: false,
+    );
 
-    await showDialog(
+    final selectedCity = await showDialog<String>(
       context: context,
-      builder: (context) {
-        return AlertDialog(
-          content: Container(
-            height: size.height * 0.3,
-            width: size.width * 0.8,
-            child: Consumer<SelectCityProvider>(
-              builder: (context, selectCityProvider, child) {
-                return Container(
-                  height: size.height * 0.3,
-                  width: size.width * 0.8,
-                  child: ListView.builder(
-                    itemCount: selectCityProvider.cities.length,
-                    itemBuilder: (context, index) {
-                      return ListTile(
-                        title: Text(selectCityProvider.cities[index]),
-                        onTap: () {
-                          setSearchText(selectCityProvider.cities[index]);
-                          isCitySelected = true;
-                          notifyListeners();
-                          Navigator.pop(context);
-                        },
-                      );
-                    },
-                  ),
-                );
-              },
+      builder:
+          (context) => AlertDialog(
+            content: SizedBox(
+              height: MediaQuery.of(context).size.height * 0.3,
+              width: MediaQuery.of(context).size.width * 0.8,
+              child: ListView.builder(
+                itemCount: selectCityProvider.cities.length,
+                itemBuilder:
+                    (context, index) => ListTile(
+                      title: Text(selectCityProvider.cities[index]),
+                      onTap:
+                          () => Navigator.pop(
+                            context,
+                            selectCityProvider.cities[index],
+                          ),
+                    ),
+              ),
             ),
           ),
-        );
-      },
     );
+
+    if (selectedCity != null) {
+      setSearchText(selectedCity);
+      isCitySelected = true;
+      notifyListeners();
+    }
   }
 
-  DateTime? selectStartDate;
-  DateTime? selectEndDate;
-  TimeOfDay? selectStartTime;
-  TimeOfDay? selectEndTime;
-
+  // Reset all fields
   void searchResetFields() {
     searchController.clear();
     selectStartDate = null;
@@ -109,61 +94,107 @@ class HomePageProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> selectedStartDate(BuildContext context) async {
-    final DateTime? startpicked = await showDatePicker(
+  // Start Date/Time selection
+  Future<void> selectStartDateAndTime(BuildContext context) async {
+    // First select date
+    final DateTime? pickedDate = await showDatePicker(
       context: context,
       initialDate: DateTime.now(),
       firstDate: DateTime.now(),
-      lastDate: DateTime.now().add(Duration(days: 365)),
+      lastDate: DateTime.now().add(const Duration(days: 365)),
     );
 
-    if (startpicked != null) {
-      selectStartDate = startpicked;
+    if (pickedDate != null) {
+      selectStartDate = pickedDate;
       notifyListeners();
-    }
-  }
-  Future<void> selectedEndDate(BuildContext context) async {
-    final DateTime? endpicked = await showDatePicker(
-      context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime.now(),
-      lastDate: DateTime.now().add(Duration(days: 365)),
-    );
 
-    if (endpicked != null) {
-      selectEndDate = endpicked;
-      notifyListeners();
-    }
-  }
+      // Then automatically select time
+      final TimeOfDay? pickedTime = await showTimePicker(
+        context: context,
+        initialTime: TimeOfDay.now(),
+      );
 
-  Future<void> selectedStartTime(BuildContext context) async {
-    final TimeOfDay? startTime = await showTimePicker(
-      context: context,
-      initialTime: TimeOfDay.now(),
-    );
-    if (startTime != null) {
-      selectStartTime = startTime;
-      notifyListeners();
+      if (pickedTime != null) {
+        selectStartTime = pickedTime;
+        notifyListeners();
+      }
     }
   }
 
-  Future<void> selectedEndTime(BuildContext context) async {
+  // End Date/Time selection
+  Future<void> selectEndDateAndTime(BuildContext context) async {
     if (selectStartTime == null) return;
 
-    final TimeOfDay? endTime = await showTimePicker(
+    // First select date
+    final DateTime? pickedDate = await showDatePicker(
       context: context,
-      initialTime: selectStartTime!,
+      initialDate: selectStartDate ?? DateTime.now(),
+      firstDate: selectStartDate ?? DateTime.now(),
+      lastDate: DateTime.now().add(const Duration(days: 365)),
     );
 
-    if (endTime != null) {
-      // Convert times to minutes for comparison
-      final startMinutes = selectStartTime!.hour * 60 + selectStartTime!.minute;
-      final endMinutes = endTime.hour * 60 + endTime.minute;
+    if (pickedDate != null) {
+      // Validate end date
+      if (selectStartDate != null && pickedDate.isBefore(selectStartDate!)) {
+        _showErrorSnackbar(context, "End date cannot be before start date");
+        return;
+      }
 
-      if (endMinutes <= startMinutes) return;
-
-      selectEndTime = endTime;
+      selectEndDate = pickedDate;
       notifyListeners();
+
+      // Then automatically select time
+      final TimeOfDay? pickedTime = await showTimePicker(
+        context: context,
+        initialTime: selectStartTime!,
+      );
+
+      if (pickedTime != null) {
+        _validateAndSetEndTime(context, pickedTime);
+      }
     }
+  }
+
+  void _validateAndSetEndTime(BuildContext context, TimeOfDay endTime) {
+    if (selectStartDate != null && selectEndDate != null) {
+      final isSameDay =
+          selectStartDate!.year == selectEndDate!.year &&
+          selectStartDate!.month == selectEndDate!.month &&
+          selectStartDate!.day == selectEndDate!.day;
+
+      if (isSameDay) {
+        final startMinutes =
+            selectStartTime!.hour * 60 + selectStartTime!.minute;
+        final endMinutes = endTime.hour * 60 + endTime.minute;
+
+        if (endMinutes <= startMinutes) {
+          _showErrorSnackbar(context, "End time must be after start time");
+          return;
+        }
+      }
+    }
+
+    selectEndTime = endTime;
+    notifyListeners();
+    _showSuccessSnackbar(context, "All details selected successfully!");
+  }
+
+  // Helper methods
+  void _showErrorSnackbar(BuildContext context, String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(message), backgroundColor: Colors.red),
+    );
+  }
+
+  void _showSuccessSnackbar(BuildContext context, String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(message), backgroundColor: Colors.green),
+    );
+  }
+
+  void setSearchText(String text) {
+    searchController.text = text;
+    _searchText = text;
+    notifyListeners();
   }
 }

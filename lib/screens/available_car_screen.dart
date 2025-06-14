@@ -121,7 +121,7 @@ class _AvailableCarScreenState extends State<AvailableCarScreen> {
                                               ? "${provider.selectStartDate!.day}/${provider.selectStartDate!.month}/${provider.selectStartDate!.year}"
                                               : "Select Date",
                                     ),
-                                    SizedBox(width: 6),
+                                    SizedBox(width: 5),
                                     _dateContainer(
                                       title: "Start Time:",
                                       date:
@@ -207,7 +207,7 @@ class _AvailableCarScreenState extends State<AvailableCarScreen> {
   Widget _dateContainer({required String title, required String date}) {
     return Expanded(
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 6, vertical: 10),
+        padding: EdgeInsets.symmetric(horizontal: 4, vertical: 10),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(10),
@@ -309,38 +309,41 @@ class _AvailableCarScreenState extends State<AvailableCarScreen> {
                       ],
                     ),
                     SizedBox(height: 8),
-                    Row(
-                      children: [
-                        Image.asset(gearPic, width: 14, height: 14),
-                        SizedBox(width: 4),
-                        Text(
-                          gear,
-                          style: TextStyle(
-                            color: Color(0xff6E7FAA),
-                            fontSize: 12,
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        children: [
+                          Image.asset(gearPic, width: 14, height: 14),
+                          SizedBox(width: 4),
+                          Text(
+                            gear,
+                            style: TextStyle(
+                              color: Color(0xff6E7FAA),
+                              fontSize: 12,
+                            ),
                           ),
-                        ),
-                        SizedBox(width: 12),
-                        Image.asset(fuelPic, width: 14, height: 14),
-                        SizedBox(width: 4),
-                        Text(
-                          fuel,
-                          style: TextStyle(
-                            color: Color(0xff6E7FAA),
-                            fontSize: 12,
+                          SizedBox(width: 12),
+                          Image.asset(fuelPic, width: 14, height: 14),
+                          SizedBox(width: 4),
+                          Text(
+                            fuel,
+                            style: TextStyle(
+                              color: Color(0xff6E7FAA),
+                              fontSize: 12,
+                            ),
                           ),
-                        ),
-                        SizedBox(width: 12),
-                        Image.asset(seatPic, width: 14, height: 14),
-                        SizedBox(width: 4),
-                        Text(
-                          seat,
-                          style: TextStyle(
-                            color: Color(0xff6E7FAA),
-                            fontSize: 12,
+                          SizedBox(width: 12),
+                          Image.asset(seatPic, width: 14, height: 14),
+                          SizedBox(width: 4),
+                          Text(
+                            seat,
+                            style: TextStyle(
+                              color: Color(0xff6E7FAA),
+                              fontSize: 12,
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                     SizedBox(height: 8),
                     Row(
@@ -375,20 +378,7 @@ class _AvailableCarScreenState extends State<AvailableCarScreen> {
                               ],
                             ),
                           ),
-                          // Text(
-                          //   "Pickup Location: $location",
-                          //   style: TextStyle(color: Colors.grey),
-                          // ),
                         ),
-                        // Expanded(
-                        //   child: Text(
-                        //     ,
-                        //     style: TextStyle(
-                        //       fontSize: 10,
-                        //       fontWeight: FontWeight.w600,
-                        //     ),
-                        //   ),
-                        // ),
                       ],
                     ),
                   ],
